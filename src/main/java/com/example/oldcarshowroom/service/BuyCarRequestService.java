@@ -80,8 +80,12 @@ public class BuyCarRequestService {
     public BuyCarRequestEntity deleteExistedBuyCarRequest(String id) {
         BuyCarRequestDto dto = buyCarRequestRepository.findById(id).orElseThrow();
         buyCarRequestRepository.deleteById(id);
+
+        System.out.println("abc");
         return BuyCarRequestEntity.fromBuyCarRequestDto(dto);
     }
+
+
 
 
 }
