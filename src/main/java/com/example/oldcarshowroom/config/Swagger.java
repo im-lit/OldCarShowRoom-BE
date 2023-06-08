@@ -21,7 +21,7 @@ public class Swagger {
                 //.securityContexts(Arrays.asList(securityContext()))
                 //.securitySchemes(Arrays.asList(apiKey()))
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.example.capstoneprojectbe")).build().apiInfo(apiInfo());
+                .apis(RequestHandlerSelectors.basePackage("com.example.oldcarshowroom")).build().apiInfo(apiInfo());
     }
 
     private ApiInfo apiInfo() {
