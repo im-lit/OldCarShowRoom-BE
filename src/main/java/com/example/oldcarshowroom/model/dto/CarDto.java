@@ -20,11 +20,11 @@ public class CarDto {
 
     private String carName;
 
-    private String carBrand;
+    //private String carBrand;
 
     private float carPrice;
 
-    private String carType;
+    // private String carType;
 
     private int yearOfRegistration;
 
@@ -47,5 +47,15 @@ public class CarDto {
     @JoinColumn(name = "showroomID")
     @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
     private ShowroomDto showroomDto;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "carBrandID")
+    @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
+    private CarBrandDto carBrandDto;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "carTypeID")
+    @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
+    private CarTypeDto carTypeDto;
 
 }

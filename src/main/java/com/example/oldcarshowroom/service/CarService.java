@@ -1,5 +1,6 @@
 package com.example.oldcarshowroom.service;
 
+import com.example.oldcarshowroom.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -7,10 +8,6 @@ import com.example.oldcarshowroom.model.dto.CarDto;
 import com.example.oldcarshowroom.model.dto.UserDto;
 import com.example.oldcarshowroom.model.response.CarEntity;
 import com.example.oldcarshowroom.model.response.UserEntity;
-import com.example.oldcarshowroom.repository.CarRepository;
-import com.example.oldcarshowroom.repository.RoleRepository;
-import com.example.oldcarshowroom.repository.ShowroomRepository;
-import com.example.oldcarshowroom.repository.UserRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,6 +21,10 @@ public class CarService {
     private final UserRepository userRepository;
 
     private final ShowroomRepository showroomRepository;
+
+    private final CarBrandRepository carBrandRepository;
+
+    private final CarTypeRepository carTypeRepository;
 
     public boolean isExisted(String id) {
         return carRepository.existsById(id);
@@ -49,9 +50,9 @@ public class CarService {
         CarDto dto = CarDto.builder()
                 .carID(entity.getCarID())
                 .carName(entity.getCarName())
-                .carBrand(entity.getCarBrand())
+                .carBrandDto(carBrandRepository.findById(entity.getCarBrandID()).orElseThrow())
                 .carPrice(entity.getCarPrice())
-                .carType(entity.getCarType())
+                .carTypeDto(carTypeRepository.findById(entity.getCarTypeID()).orElseThrow())
                 .yearOfRegistration(entity.getYearOfRegistration())
                 .carOdo(entity.getCarOdo())
                 .carOrigin(entity.getCarOrigin())
@@ -70,9 +71,9 @@ public class CarService {
         CarDto dto = carRepository.findById(entity.getCarID()).orElseThrow();
 
         dto.setCarName(entity.getCarName());
-        dto.setCarBrand(entity.getCarBrand());
+        dto.setCarBrandDto(carBrandRepository.findById(entity.getCarBrandID()).orElseThrow());
         dto.setCarPrice(entity.getCarPrice());
-        dto.setCarType(entity.getCarType());
+        dto.setCarTypeDto(carTypeRepository.findById(entity.getCarTypeID()).orElseThrow());
         dto.setYearOfRegistration(entity.getYearOfRegistration());
         dto.setCarOdo(entity.getCarOdo());
         dto.setCarOrigin(entity.getCarOrigin());
@@ -90,6 +91,7 @@ public class CarService {
         carRepository.deleteById(id);
         return CarEntity.fromCarDto(dto);
     }
+
 
 
 

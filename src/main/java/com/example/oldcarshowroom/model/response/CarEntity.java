@@ -12,48 +12,49 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CarEntity {
-    private String carID;
 
-    private String carName;
+        private String carID;
 
-    private String carBrand;
+        private String carName;
 
-    private float carPrice;
+        private String carBrandID;
 
-    private String carType;
+        private float carPrice;
 
-    private int yearOfRegistration;
+        private String carTypeID;
 
-    private int carOdo;
+        private int yearOfRegistration;
 
-    private String carOrigin;
+        private int carOdo;
 
-    private String carDescription;
+        private String carOrigin;
 
-    private String carCondition;
+        private String carDescription;
 
-    private boolean carStatus;
+        private String carCondition;
 
-    private String userID;
+        private boolean carStatus;
 
-    private String showroomID;
+        private String userID;
 
-    public static CarEntity fromCarDto(CarDto dto) {
-        return CarEntity.builder()
-                .carID(dto.getCarID())
-                .carName(dto.getCarName())
-                .carBrand(dto.getCarBrand())
-                .carPrice(dto.getCarPrice())
-                .carType(dto.getCarType())
-                .yearOfRegistration(dto.getYearOfRegistration())
-                .carOdo(dto.getCarOdo())
-                .carOrigin(dto.getCarOrigin())
-                .carDescription(dto.getCarDescription())
-                .carCondition(dto.getCarCondition())
-                .carStatus(dto.isCarStatus())
-                .userID(dto.getUserDto().getUserID())
-                .showroomID(dto.getShowroomDto().getShowroomID())
-                .build();
-    }
+        private String showroomID;
+
+        public static CarEntity fromCarDto(CarDto dto) {
+            return CarEntity.builder()
+                    .carID(dto.getCarID())
+                    .carName(dto.getCarName())
+                    .carBrandID(dto.getCarBrandDto().getCarBrandID())
+                    .carPrice(dto.getCarPrice())
+                    .carTypeID(dto.getCarTypeDto().getCarTypeID())
+                    .yearOfRegistration(dto.getYearOfRegistration())
+                    .carOdo(dto.getCarOdo())
+                    .carOrigin(dto.getCarOrigin())
+                    .carDescription(dto.getCarDescription())
+                    .carCondition(dto.getCarCondition())
+                    .carStatus(dto.isCarStatus())
+                    .userID(dto.getUserDto().getUserID())
+                    .showroomID(dto.getShowroomDto().getShowroomID())
+                    .build();
+        }
 
 }
