@@ -38,8 +38,8 @@ public class CarTypeController {
     }
 
     @PutMapping
-    private ResponseEntity updateExistedCarType(@RequestBody CarTypeEntity entity) {
-        return ResponseEntity.ok().body(carTypeService.updateExistedCarType(entity));
+    private ResponseEntity updateExistedCarType(@RequestParam String id, @RequestBody CarTypeEntity entity) {
+        return ResponseEntity.ok().body(carTypeService.updateExistedCarType(id, entity));
     }
 
     @DeleteMapping()

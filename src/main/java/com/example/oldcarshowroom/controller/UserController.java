@@ -27,9 +27,14 @@ public class UserController {
         return ResponseEntity.ok().body(entity);
     }
 
+    @GetMapping()
+    private ResponseEntity getAllUser(){
+        return ResponseEntity.ok().body(userService.getAllUser());
+    }
+
     @PostMapping("/login")
-    private ResponseEntity checkLogin(@RequestParam String id, @RequestParam String password) {
-        UserEntity entity = userService.checkLogin(id,password);
+    private ResponseEntity checkLogin(@RequestParam String username, @RequestParam String password) {
+        UserEntity entity = userService.checkLogin(username,password);
         if(entity == null){
             return ResponseEntity.badRequest().body("Wrong username & password");
         }
@@ -45,8 +50,9 @@ public class UserController {
     }
 
     @PutMapping
-    private ResponseEntity updateExistedUser(@RequestBody UserEntity entity) {
-        return ResponseEntity.ok().body(userService.updateExistedUser(entity));
+    private ResponseEntity updateExistedUser(@RequestParam String id ,
+                                             @RequestBody UserEntity entity) {
+        return ResponseEntity.ok().body(userService.updateExistedUser(id, entity));
     }
 
     @DeleteMapping()

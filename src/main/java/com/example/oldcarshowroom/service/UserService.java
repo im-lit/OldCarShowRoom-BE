@@ -12,6 +12,7 @@ import com.example.oldcarshowroom.repository.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -30,7 +31,7 @@ public class UserService {
 
     public UserEntity createNewUser(UserEntity entity) {
         UserDto dto = UserDto.builder()
-                .userID(entity.getUserID())
+                .userName(entity.getUserName())
                 .password(entity.getPassword())
                 .fullName(entity.getFullName())
                 .phone(entity.getPhone())
@@ -44,11 +45,12 @@ public class UserService {
     }
 
 
-    public UserEntity updateExistedUser(UserEntity entity) {
-        UserDto dto = userRepository.findById(entity.getUserID()).orElseThrow();
+    public UserEntity updateExistedUser(String id, UserEntity entity) {
+        UserDto dto = userRepository.findById(id).orElseThrow();
 
-        dto.setUserID(entity.getUserID());
+        //dto.setUserID(entity.getUserID());
         dto.setPassword(entity.getPassword());
+        dto.setUserName(entity.getUserName());
         dto.setFullName(entity.getFullName());
         dto.setPhone(entity.getPhone());
         dto.setAddress(entity.getAddress());
@@ -65,12 +67,17 @@ public class UserService {
         return UserEntity.fromUserDto(dto);
     }
 
-    public UserEntity checkLogin(String id, String password){
+    public UserEntity checkLogin(String userName, String password) {
         //123213
-        return UserEntity.fromUserDto(userRepository.checkLoginUserByUserIdAndPassword(id,password));
+        return UserEntity.fromUserDto(userRepository.checkLoginUserByUserIdAndPassword(userName, password));
 
     }
 
+    public List<UserEntity> getAllUser(){
+        return userRepository.findAll().stream()
+                .map(UserEntity::fromUserDto)
+                .collect(Collectors.toList());
+    }
 
 
 }

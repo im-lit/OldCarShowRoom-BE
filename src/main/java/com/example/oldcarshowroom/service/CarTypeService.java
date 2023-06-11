@@ -20,7 +20,6 @@ public class CarTypeService {
 
     public CarTypeEntity createNewCarType(CarTypeEntity entity) {
         CarTypeDto dto = CarTypeDto.builder()
-                .carTypeID(entity.getCarTypeID())
                 .carTypeName(entity.getCarTypeName())
                 .build();
 
@@ -33,10 +32,10 @@ public class CarTypeService {
                 .collect(Collectors.toList());
     }
 
-    public CarTypeEntity updateExistedCarType(CarTypeEntity entity) {
-        CarTypeDto dto = carTypeRepository.findById(entity.getCarTypeID()).orElseThrow();
+    public CarTypeEntity updateExistedCarType(String id, CarTypeEntity entity) {
+        CarTypeDto dto = carTypeRepository.findById(id).orElseThrow();
 
-        dto.setCarTypeID(entity.getCarTypeID());
+
         dto.setCarTypeName(entity.getCarTypeName());
 
         return CarTypeEntity.fromCarTypeDto(carTypeRepository.save(dto));

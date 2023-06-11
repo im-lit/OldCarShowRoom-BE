@@ -16,6 +16,7 @@ import javax.persistence.*;
 @Table(name = "tbl_car")
 public class CarDto {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private String carID;
 
     private String carName;
@@ -36,7 +37,7 @@ public class CarDto {
 
     private String carCondition;
 
-    private boolean carStatus;
+    private CarStatus carStatus;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userID")
@@ -58,4 +59,7 @@ public class CarDto {
     @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
     private CarTypeDto carTypeDto;
 
+    public enum CarStatus{
+       CAN_NOT_SALE, CAN_SALE, ON_SALE
+    }
 }

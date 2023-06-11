@@ -38,8 +38,8 @@ public class RoleController {
     }
 
     @PutMapping
-    private ResponseEntity updateExistedRole(@RequestBody RoleEntity entity) {
-        return ResponseEntity.ok().body(roleService.updateExistedRole(entity));
+    private ResponseEntity updateExistedRole(@RequestParam String id,@RequestBody RoleEntity entity) {
+        return ResponseEntity.ok().body(roleService.updateExistedRole(id, entity));
     }
 
     @DeleteMapping()

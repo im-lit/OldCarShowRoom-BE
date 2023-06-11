@@ -16,6 +16,7 @@ import javax.persistence.*;
 @Table(name = "tbl_showroom")
 public class ShowroomDto {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private String showroomID;
 
     private String showroomName;

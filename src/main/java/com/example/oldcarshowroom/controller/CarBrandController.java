@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/carbrands")
 public class CarBrandController {
 
-    private final CarBrandService carBrandService;
+    private final CarBrandService carBrandService = null;
     @GetMapping
     private ResponseEntity getAllCarBrands() {
         List<CarBrandEntity> listEntity = carBrandService.getAllCarBrands();
@@ -36,8 +36,8 @@ public class CarBrandController {
     }
 
     @PutMapping
-    private ResponseEntity updateExistedCarBrand(@RequestBody CarBrandEntity entity) {
-        return ResponseEntity.ok().body(carBrandService.updateExistedCarBrand(entity));
+    private ResponseEntity updateExistedCarBrand(@RequestParam String id, @RequestBody CarBrandEntity entity) {
+        return ResponseEntity.ok().body(carBrandService.updateExistedCarBrand(id, entity));
     }
 
     @DeleteMapping()

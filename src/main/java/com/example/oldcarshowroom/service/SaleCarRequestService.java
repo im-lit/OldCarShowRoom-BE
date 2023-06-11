@@ -49,7 +49,6 @@ public class SaleCarRequestService {
 
     public SaleCarRequestEntity createNewSaleCarRequest(SaleCarRequestEntity entity) {
         SaleCarRequestDto dto = SaleCarRequestDto.builder()
-                .saleCarID(entity.getSaleCarID())
                 .status(entity.isStatus())
                 .date(entity.getDate())
                 .userDto(userRepository.findById(entity.getUserID()).orElseThrow())
@@ -61,8 +60,8 @@ public class SaleCarRequestService {
     }
 
 
-    public SaleCarRequestEntity updateExistedSaleCarRequest(SaleCarRequestEntity entity) {
-        SaleCarRequestDto dto = saleCarRequestRepository.findById(entity.getSaleCarID()).orElseThrow();
+    public SaleCarRequestEntity updateExistedSaleCarRequest(String id, SaleCarRequestEntity entity) {
+        SaleCarRequestDto dto = saleCarRequestRepository.findById(id).orElseThrow();
 
         dto.setDate(entity.getDate());
         dto.setStatus(entity.isStatus());

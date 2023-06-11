@@ -15,6 +15,7 @@ import javax.persistence.*;
 @Table(name = "tbl_role")
 public class RoleDto {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private String roleID;
 
     private String roleName;

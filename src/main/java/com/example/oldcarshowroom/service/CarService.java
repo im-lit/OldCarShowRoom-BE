@@ -46,9 +46,14 @@ public class CarService {
                 .collect(Collectors.toList());
     }
 
+    public List<CarEntity> getAllCarCanSale() {
+        return carRepository.getAllCarCanSale().stream()
+                .map(CarEntity::fromCarDto)
+                .collect(Collectors.toList());
+    }
+
     public CarEntity createNewCar(CarEntity entity) {
         CarDto dto = CarDto.builder()
-                .carID(entity.getCarID())
                 .carName(entity.getCarName())
                 .carBrandDto(carBrandRepository.findById(entity.getCarBrandID()).orElseThrow())
                 .carPrice(entity.getCarPrice())
@@ -58,7 +63,7 @@ public class CarService {
                 .carOrigin(entity.getCarOrigin())
                 .carDescription(entity.getCarDescription())
                 .carCondition(entity.getCarCondition())
-                .carStatus(entity.isCarStatus())
+                .carStatus(CarDto.CarStatus.valueOf(entity.getCarStatus()))
                 .userDto(userRepository.findById(entity.getUserID()).orElseThrow())
                 .showroomDto(showroomRepository.findById(entity.getShowroomID()).orElseThrow())
                 .build();
@@ -67,8 +72,8 @@ public class CarService {
     }
 
 
-    public CarEntity updateExistedCar(CarEntity entity) {
-        CarDto dto = carRepository.findById(entity.getCarID()).orElseThrow();
+    public CarEntity updateExistedCar(String id, CarEntity entity) {
+        CarDto dto = carRepository.findById(id).orElseThrow();
 
         dto.setCarName(entity.getCarName());
         dto.setCarBrandDto(carBrandRepository.findById(entity.getCarBrandID()).orElseThrow());
@@ -79,7 +84,7 @@ public class CarService {
         dto.setCarOrigin(entity.getCarOrigin());
         dto.setCarDescription(entity.getCarDescription());
         dto.setCarCondition(entity.getCarCondition());
-        dto.setCarStatus(entity.isCarStatus());
+        dto.setCarStatus(CarDto.CarStatus.valueOf(entity.getCarStatus()));
         dto.setUserDto(userRepository.findById(entity.getUserID()).orElseThrow());
         dto.setShowroomDto(showroomRepository.findById(entity.getShowroomID()).orElseThrow());
 

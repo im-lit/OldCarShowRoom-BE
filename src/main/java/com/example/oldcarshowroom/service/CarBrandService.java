@@ -21,7 +21,6 @@ public class CarBrandService {
 
     public CarBrandEntity createNewCarBrand(CarBrandEntity entity) {
         CarBrandDto dto = CarBrandDto.builder()
-                .carBrandID(entity.getCarBrandID())
                 .carBrandName(entity.getCarBrandName())
                 .logoUrl(entity.getLogoUrl())
                 .build();
@@ -35,10 +34,9 @@ public class CarBrandService {
                 .collect(Collectors.toList());
     }
 
-    public CarBrandEntity updateExistedCarBrand(CarBrandEntity entity) {
-        CarBrandDto dto = carBrandRepository.findById(entity.getCarBrandID()).orElseThrow();
+    public CarBrandEntity updateExistedCarBrand(String id, CarBrandEntity entity) {
+        CarBrandDto dto = carBrandRepository.findById(id).orElseThrow();
 
-        dto.setCarBrandID(entity.getCarBrandID());
         dto.setCarBrandName(entity.getCarBrandName());
         dto.setLogoUrl(entity.getLogoUrl());
 

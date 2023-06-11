@@ -26,6 +26,11 @@ public class CarController  {
         return ResponseEntity.ok().body(entity);
     }
 
+    @GetMapping
+    private ResponseEntity getAllCarCanSale(){
+        return ResponseEntity.ok().body(carService.getAllCarCanSale());
+    }
+
     @GetMapping("/userid/{id}")
     private ResponseEntity getUserByUserID(@PathVariable String id){
         List<CarEntity> entity = carService.getCarByUserID(id);
@@ -47,8 +52,8 @@ public class CarController  {
     }
 
     @PutMapping
-    private ResponseEntity updateExistedCar(@RequestBody CarEntity entity) {
-        return ResponseEntity.ok().body(carService.updateExistedCar(entity));
+    private ResponseEntity updateExistedCar(@RequestParam String id, @RequestBody CarEntity entity) {
+        return ResponseEntity.ok().body(carService.updateExistedCar(id, entity));
     }
 
     @DeleteMapping()

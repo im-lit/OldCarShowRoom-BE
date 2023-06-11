@@ -28,7 +28,6 @@ public class ShowroomService {
 
     public ShowroomEntity createNewShowroom(ShowroomEntity entity) {
         ShowroomDto dto = ShowroomDto.builder()
-                .showroomID(entity.getShowroomID())
                 .showroomName(entity.getShowroomName())
                 .showroomAddress(entity.getShowroomAddress())
                 .showroomPhone(entity.getShowroomPhone())
@@ -43,8 +42,8 @@ public class ShowroomService {
         return ShowroomEntity.fromShowroomDto(showroomRepository.getById(id));
     }
 
-    public ShowroomEntity updateExistedShowroom(ShowroomEntity entity) {
-        ShowroomDto dto = showroomRepository.findById(entity.getShowroomID()).orElseThrow();
+    public ShowroomEntity updateExistedShowroom(String id, ShowroomEntity entity) {
+        ShowroomDto dto = showroomRepository.findById(id).orElseThrow();
 
         dto.setShowroomName(entity.getShowroomName());
         dto.setShowroomAddress(entity.getShowroomAddress());

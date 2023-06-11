@@ -13,32 +13,19 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "tbl_user")
-public class UserDto {
+@Table(name = "tbl_carimage")
+public class CarImage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String userID;
+    private String carImageID;
 
-    private String userName;
-
-    private String password;
-
-    private String fullName;
-
-    private String phone;
-
-    private String address;
-
-    private String avatarUrl;
-
-    private boolean status;
+    private String imageUrl;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "roleID")
+    @JoinColumn(name = "carID")
     @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
-    private RoleDto roleDto;
-
+    private CarDto carDto;
 
 
 }

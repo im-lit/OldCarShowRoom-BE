@@ -5,9 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -17,6 +15,7 @@ import javax.persistence.Table;
 @Table(name = "tbl_cartype")
 public class CarTypeDto {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private String carTypeID;
 
     private String carTypeName;

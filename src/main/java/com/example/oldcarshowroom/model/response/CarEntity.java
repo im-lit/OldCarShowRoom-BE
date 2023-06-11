@@ -33,7 +33,7 @@ public class CarEntity {
 
         private String carCondition;
 
-        private boolean carStatus;
+        private String carStatus;
 
         private String userID;
 
@@ -51,7 +51,7 @@ public class CarEntity {
                     .carOrigin(dto.getCarOrigin())
                     .carDescription(dto.getCarDescription())
                     .carCondition(dto.getCarCondition())
-                    .carStatus(dto.isCarStatus())
+                    .carStatus(dto.getCarStatus().toString())
                     .userID(dto.getUserDto().getUserID())
                     .showroomID(dto.getShowroomDto().getShowroomID())
                     .build();

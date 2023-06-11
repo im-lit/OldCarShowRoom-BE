@@ -51,8 +51,8 @@ public class BuyCarRequestController {
     }
 
     @PutMapping
-    private ResponseEntity updateExistedBuyCarRequest(@RequestBody BuyCarRequestEntity entity) {
-        return ResponseEntity.ok().body(buyCarRequestService.updateExistedBuyCarRequest(entity));
+    private ResponseEntity updateExistedBuyCarRequest(@RequestParam String id,@RequestBody BuyCarRequestEntity entity) {
+        return ResponseEntity.ok().body(buyCarRequestService.updateExistedBuyCarRequest(id, entity));
     }
 
     @DeleteMapping()

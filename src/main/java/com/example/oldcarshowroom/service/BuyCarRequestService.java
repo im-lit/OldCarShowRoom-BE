@@ -53,7 +53,6 @@ public class BuyCarRequestService {
 
     public BuyCarRequestEntity createNewBuyCarRequest(BuyCarRequestEntity entity) {
         BuyCarRequestDto dto = BuyCarRequestDto.builder()
-                .buyCarID(entity.getBuyCarID())
                 .status(entity.isStatus())
                 .date(entity.getDate())
                 .userDto(userRepository.findById(entity.getUserID()).orElseThrow())
@@ -65,8 +64,8 @@ public class BuyCarRequestService {
     }
 
 
-    public BuyCarRequestEntity updateExistedBuyCarRequest(BuyCarRequestEntity entity) {
-        BuyCarRequestDto dto = buyCarRequestRepository.findById(entity.getBuyCarID()).orElseThrow();
+    public BuyCarRequestEntity updateExistedBuyCarRequest(String id, BuyCarRequestEntity entity) {
+        BuyCarRequestDto dto = buyCarRequestRepository.findById(id).orElseThrow();
 
         dto.setDate(entity.getDate());
         dto.setStatus(entity.isStatus());

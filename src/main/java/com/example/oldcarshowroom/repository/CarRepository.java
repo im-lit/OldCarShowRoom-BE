@@ -17,4 +17,7 @@ public interface CarRepository extends JpaRepository<CarDto, String> {
 
     @Query("select dto from CarDto dto where dto.userDto.userID = ?1")
     List<CarDto> getCarByUserID(String id);
+
+    @Query("select dto from CarDto dto where dto.carStatus = 'CAN_SALE'")
+    List<CarDto> getAllCarCanSale();
 }

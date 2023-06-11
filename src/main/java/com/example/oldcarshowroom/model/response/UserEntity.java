@@ -15,6 +15,8 @@ import com.example.oldcarshowroom.model.dto.UserDto;
 public class UserEntity {
     private String userID;
 
+    private String userName;
+
     private String password;
 
     private String fullName;
@@ -32,6 +34,7 @@ public class UserEntity {
     public static UserEntity fromUserDto(UserDto dto) {
         return UserEntity.builder()
                 .userID(dto.getUserID())
+                .userName(dto.getUserName())
                 .password(dto.getPassword())
                 .fullName(dto.getFullName())
                 .phone(dto.getPhone())

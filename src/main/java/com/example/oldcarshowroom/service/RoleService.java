@@ -22,7 +22,7 @@ public class RoleService {
 
     public RoleEntity createNewRole(RoleEntity entity) {
         RoleDto dto = RoleDto.builder()
-                .roleID(entity.getRoleID())
+//                .roleID(entity.getRoleID())
                 .roleName(entity.getRoleName())
                 .build();
 
@@ -35,10 +35,10 @@ public class RoleService {
                 .collect(Collectors.toList());
     }
 
-    public RoleEntity updateExistedRole(RoleEntity entity) {
-        RoleDto dto = roleRepository.findById(entity.getRoleID()).orElseThrow();
+    public RoleEntity updateExistedRole(String id, RoleEntity entity) {
+        RoleDto dto = roleRepository.findById(id).orElseThrow();
 
-        dto.setRoleID(entity.getRoleID());
+//        dto.setRoleID(entity.getRoleID());
         dto.setRoleName(entity.getRoleName());
 
         return RoleEntity.fromRoleDto(roleRepository.save(dto));

@@ -36,8 +36,8 @@ public class ShowroomController {
     }
 
     @PutMapping
-    private ResponseEntity updateExistedShowroom(@RequestBody ShowroomEntity entity) {
-        return ResponseEntity.ok().body(showroomService.updateExistedShowroom(entity));
+    private ResponseEntity updateExistedShowroom(@RequestParam String id, @RequestBody ShowroomEntity entity) {
+        return ResponseEntity.ok().body(showroomService.updateExistedShowroom(id, entity));
     }
 
     @DeleteMapping()
