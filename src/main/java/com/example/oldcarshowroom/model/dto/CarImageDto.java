@@ -14,7 +14,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "tbl_carimage")
-public class CarImage {
+public class CarImageDto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
