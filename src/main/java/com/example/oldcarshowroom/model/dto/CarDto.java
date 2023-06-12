@@ -32,9 +32,11 @@ public class CarDto {
     private int carOdo;
 
     private String carOrigin;
-
+    
+    @Column(name = "car_description", columnDefinition = "nvarchar(255)", nullable = true)
     private String carDescription;
-
+    
+    @Column(name = "car_condition", columnDefinition = "nvarchar(50)", nullable = true)
     private String carCondition;
 
     private CarStatus carStatus;
