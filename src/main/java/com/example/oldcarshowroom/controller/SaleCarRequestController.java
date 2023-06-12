@@ -1,7 +1,7 @@
 package com.example.oldcarshowroom.controller;
 
 import com.example.oldcarshowroom.model.response.SaleCarRequestEntity;
-import com.example.oldcarshowroom.oom.service.SaleCarRequestService;
+import com.example.oldcarshowroom.service.SaleCarRequestService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

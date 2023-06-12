@@ -1,4 +1,4 @@
-package com.example.oldcarshowroom.oom.service;
+package com.example.oldcarshowroom.service;
 
 import com.example.oldcarshowroom.model.dto.SaleCarRequestDto;
 import com.example.oldcarshowroom.model.response.SaleCarRequestEntity;
