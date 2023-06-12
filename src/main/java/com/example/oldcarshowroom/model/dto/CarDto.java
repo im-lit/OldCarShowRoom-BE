@@ -38,6 +38,8 @@ public class CarDto {
     
     @Column(name = "car_condition", columnDefinition = "nvarchar(50)", nullable = true)
     private String carCondition;
+    @Enumerated(EnumType.STRING)
+
 
     private CarStatus carStatus;
 
