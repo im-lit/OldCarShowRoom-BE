@@ -46,9 +46,9 @@ INSERT [dbo].[tbl_showroom] ([showroomid], [showroom_address], [showroom_name], 
 GO
 INSERT [dbo].[tbl_showroom] ([showroomid], [showroom_address], [showroom_name], [showroom_phone], [userid]) VALUES (N'2', N'79 Pasteur', N'Nam Long Auto', N'05648655', N'4')
 GO
-INSERT [dbo].[tbl_car] ([carid], [car_condition], [car_description], [car_name], [car_odo], [car_origin], [car_price], [car_status], [year_of_registration], [car_brandid], [car_typeid], [showroomid], [userid]) VALUES (N'1', N'Ðã sử dụng', N'Chính hãng WesternFord bán xe qua sử dụng Ford Ranger xls 4x2 MT, sản xuất năm 2017, đi được 81000km, nhập khẩu Thái Lan.Xe công ty đứng tên xuất hoá đơn.Xe đã được kiểm tra tổng quát chất lượng rất tốt.', N'Ranger XLS 4x2 MT', 81000, N'10', 449000000, 1, 2017, N'5', N'4', N'1', N'3')
+INSERT [dbo].[tbl_car] ([carid], [car_condition], [car_description], [car_name], [car_odo], [car_origin], [car_price], [car_status], [year_of_registration], [car_brandid], [car_typeid], [showroomid], [userid]) VALUES (N'1', N'Ðã sử dụng', N'Chính hãng WesternFord bán xe qua sử dụng Ford Ranger xls 4x2 MT, sản xuất năm 2017, đi được 81000km, nhập khẩu Thái Lan.Xe công ty đứng tên xuất hoá đơn.Xe đã được kiểm tra tổng quát chất lượng rất tốt.', N'Ranger XLS 4x2 MT', 81000, N'10', 449000000, 'CAN_SALE', 2017, N'5', N'4', N'1', N'3')
 GO
-INSERT [dbo].[tbl_car] ([carid], [car_condition], [car_description], [car_name], [car_odo], [car_origin], [car_price], [car_status], [year_of_registration], [car_brandid], [car_typeid], [showroomid], [userid]) VALUES (N'2', N'Mới', N'NamLong AUTO,79 Pasteur, Quận 1, Tp.HCM', N'VINFAST VF 5', 11000, N'10', 428000000, 1, 2023, N'6', N'7', N'2', N'4')
+INSERT [dbo].[tbl_car] ([carid], [car_condition], [car_description], [car_name], [car_odo], [car_origin], [car_price], [car_status], [year_of_registration], [car_brandid], [car_typeid], [showroomid], [userid]) VALUES (N'2', N'Mới', N'NamLong AUTO,79 Pasteur, Quận 1, Tp.HCM', N'VINFAST VF 5', 11000, N'10', 428000000, 'CAN_SALE', 2023, N'6', N'7', N'2', N'4')
 GO
 INSERT [dbo].[tbl_carimage] ([car_imageid], [image_url], [carid]) VALUES (N'1', N'https://cdn.chotot.com/7kH5SuKn8BU7mS8zCrhmBj4t-nKfIYOYYMSM-t1R0T8/preset:view/plain/a8d73a34a064d023da9d39265d63ea6c-2828957521130015872.jpg', N'1')
 GO
