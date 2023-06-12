@@ -36,6 +36,8 @@ public class CarDto {
     private String carDescription;
 
     private String carCondition;
+    @Enumerated(EnumType.STRING)
+
 
     private CarStatus carStatus;
 
