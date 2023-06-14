@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.oldcarshowroom.model.dto.RoleDto;
 import com.example.oldcarshowroom.model.dto.ShowroomDto;
+import com.example.oldcarshowroom.model.response.CarEntity;
 import com.example.oldcarshowroom.model.response.RoleEntity;
 import com.example.oldcarshowroom.model.response.ShowroomEntity;
 import com.example.oldcarshowroom.model.response.UserEntity;
@@ -14,6 +15,7 @@ import com.example.oldcarshowroom.repository.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -25,6 +27,12 @@ public class ShowroomService {
     public boolean isExisted(String id) {
         return showroomRepository.existsById(id);
     }
+    
+    public List<ShowroomEntity> getAllShowroom() {
+        return showroomRepository.findAll().stream()
+                .map(ShowroomEntity::fromShowroomDto)
+                .collect(Collectors.toList());
+    } 
 
     public ShowroomEntity createNewShowroom(ShowroomEntity entity) {
         ShowroomDto dto = ShowroomDto.builder()

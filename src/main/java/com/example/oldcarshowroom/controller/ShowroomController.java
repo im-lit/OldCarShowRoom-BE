@@ -18,7 +18,12 @@ import java.util.List;
 public class ShowroomController {
 
 
-    private final ShowroomService showroomService;
+    private final ShowroomService showroomService; 
+    
+    @GetMapping
+    private ResponseEntity getAllShowroom() {
+    	return ResponseEntity.ok().body(showroomService.getAllShowroom());
+    }
 
 
     @GetMapping("/{id}")
