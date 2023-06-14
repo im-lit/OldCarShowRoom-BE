@@ -46,9 +46,8 @@ INSERT [dbo].[tbl_user] ([userid], [address], [avatar_url], [full_name], [passwo
 GO
 INSERT [dbo].[tbl_user] ([userid], [address], [avatar_url], [full_name], [password], [phone], [status], [user_name], [roleid]) VALUES (N'4', N'77 Thới An', N'https://pbs.twimg.com/media/BtFUrp6CEAEmsml.jpg', N'Nguyễn Trần Nam Long', N'123', N'0797986546', 1, N'longnguyen', N'3')
 GO
-INSERT [dbo].[tbl_showroom] ([showroomid], [showroom_address], [showroom_name], [showroom_phone], [userid]) VALUES (N'1', N'888 Trần Hưng Ðạo', N'Showroom Thai Hoan', N'090546123', N'3')
-GO
-INSERT [dbo].[tbl_showroom] ([showroomid], [showroom_address], [showroom_name], [showroom_phone], [userid]) VALUES (N'2', N'79 Pasteur', N'Nam Long Auto', N'05648655', N'4')
+INSERT [dbo].[tbl_showroom] ([showroomid], [showroom_address], [showroom_avatar], [showroom_name], [showroom_phone], [userid]) VALUES (N'1', N'888 Trần Hưng Ðạo',N'https://i.pinimg.com/originals/ea/31/37/ea313708c16fededd3e13f52faa3e51d.jpg', N'Showroom Thai Hoan', N'090546123', N'3')
+INSERT [dbo].[tbl_showroom] ([showroomid], [showroom_address], [showroom_avatar], [showroom_name], [showroom_phone], [userid]) VALUES (N'2', N'79 Pasteur',N'https://cdn.batdongsan.com.vi/gpictures/500x250/1748/MnxBRjFRaXBOSXFoXzhvZ3REbng5SjZJUGRpVF9UNHNRYktTQWFpY2ZMTnA4aQ.jpg', N'Nam Long Auto', N'05648655', N'4')
 GO
 INSERT [dbo].[tbl_car] ([carid], [car_avatar], [car_condition], [car_description], [car_name], [car_odo], [car_origin], [car_price], [car_status], [year_of_registration], [car_brandid], [car_typeid], [showroomid], [userid]) VALUES (N'1', N'https://cdn.chotot.com/7kH5SuKn8BU7mS8zCrhmBj4t-nKfIYOYYMSM-t1R0T8/preset:view/plain/a8d73a34a064d023da9d39265d63ea6c-2828957521130015872.jpg', N'Ðã sử dụng', N'Chính hãng WesternFord bán xe qua sử dụng Ford Ranger xls 4x2 MT, sản xuất năm 2017, đi được 81000km, nhập khẩu Thái Lan.Xe công ty đứng tên xuất hoá đơn.Xe đã được kiểm tra tổng quát chất lượng rất tốt.', N'Ranger XLS 4x2 MT', 81000, N'Mỹ', 449000000, N'CAN_SALE', 2017, N'5', N'4', N'1', N'3')
 GO

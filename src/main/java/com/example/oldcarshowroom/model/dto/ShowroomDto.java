@@ -24,6 +24,8 @@ public class ShowroomDto {
     
     @Column(name = "showroom_address", columnDefinition = "nvarchar(255)", nullable = true)
     private String showroomAddress;
+    
+    private String showroomAvatar;
 
     private String showroomPhone;
 
