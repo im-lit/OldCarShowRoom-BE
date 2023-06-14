@@ -41,6 +41,8 @@ public class CarDto {
     
     @Enumerated(EnumType.STRING)
     private CarStatus carStatus;
+    
+    private String carAvatar;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userID")
