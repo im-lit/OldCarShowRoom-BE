@@ -16,7 +16,8 @@ import javax.persistence.*;
 @Table(name = "tbl_buycarrequest")
 public class BuyCarRequestDto {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "buy_carid")
     private int buyCarID;
 
     private boolean status;

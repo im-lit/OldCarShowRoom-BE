@@ -25,7 +25,7 @@ public class CarImageController {
 
 
     @GetMapping("/carID/{carID}")
-    private ResponseEntity getCarImageByCarID(@PathVariable String carID) {
+    private ResponseEntity getCarImageByCarID(@PathVariable Integer carID) {
         List<CarImageEntity> entity = carImageService.getCarImageByCarID(carID);
         return ResponseEntity.ok().body(entity);
     }

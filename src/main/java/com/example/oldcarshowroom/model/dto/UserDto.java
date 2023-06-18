@@ -17,7 +17,8 @@ import javax.persistence.*;
 public class UserDto {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "userid")
     private int userID;
 
     private String userName;

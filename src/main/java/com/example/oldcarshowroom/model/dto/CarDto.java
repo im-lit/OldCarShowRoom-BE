@@ -16,7 +16,8 @@ import javax.persistence.*;
 @Table(name = "tbl_car")
 public class CarDto {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "carid")
     private int carID;
   
     @Column(name = "car_name", columnDefinition = "nvarchar(250)", nullable = true)

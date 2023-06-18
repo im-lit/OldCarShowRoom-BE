@@ -16,7 +16,8 @@ import javax.persistence.*;
 @Table(name = "tbl_showroom")
 public class ShowroomDto {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "showroomid")
     private int showroomID;
   
     @Column(name = "showroom_name", columnDefinition = "nvarchar(255)", nullable = true)
@@ -28,6 +29,9 @@ public class ShowroomDto {
     private String showroomAvatar;
 
     private String showroomPhone;
+    
+    @Column(name = "showroom_description", columnDefinition = "nvarchar(255)", nullable = true)
+    private String showroomDescription;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userID")

@@ -15,7 +15,8 @@ import javax.persistence.*;
 @Table(name = "tbl_cartype")
 public class CarTypeDto {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "car_typeid")
     private int carTypeID;
 
     private String carTypeName;

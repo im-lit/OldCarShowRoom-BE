@@ -17,7 +17,8 @@ import javax.persistence.*;
 public class CarImageDto {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "car_imageid")
     private int carImageID;
 
     private String imageUrl;
