@@ -14,9 +14,7 @@ import java.util.stream.Collectors;
 public class CarTypeService {
     private final CarTypeRepository carTypeRepository;
 
-    public boolean isExisted(String id) {
-        return carTypeRepository.existsById(id);
-    }
+
 
     public CarTypeEntity createNewCarType(CarTypeEntity entity) {
         CarTypeDto dto = CarTypeDto.builder()
@@ -32,7 +30,7 @@ public class CarTypeService {
                 .collect(Collectors.toList());
     }
 
-    public CarTypeEntity updateExistedCarType(String id, CarTypeEntity entity) {
+    public CarTypeEntity updateExistedCarType(int id, CarTypeEntity entity) {
         CarTypeDto dto = carTypeRepository.findById(id).orElseThrow();
 
 
@@ -41,14 +39,14 @@ public class CarTypeService {
         return CarTypeEntity.fromCarTypeDto(carTypeRepository.save(dto));
     }
 
-    public CarTypeEntity deleteExistedCarType(String id) {
+    public CarTypeEntity deleteExistedCarType(int id) {
         CarTypeDto dto = carTypeRepository.findById(id).orElseThrow();
         carTypeRepository.deleteById(id);
         return CarTypeEntity.fromCarTypeDto(dto);
     }
 
 
-    public CarTypeEntity getCarTypeByCarTypeID(String id) {
+    public CarTypeEntity getCarTypeByCarTypeID(int id) {
         return CarTypeEntity.fromCarTypeDto(carTypeRepository.getById(id));
     }
 }

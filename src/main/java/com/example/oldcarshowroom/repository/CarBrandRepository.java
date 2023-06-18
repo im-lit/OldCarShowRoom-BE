@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 
-public interface CarBrandRepository extends JpaRepository<CarBrandDto, String> {
+public interface CarBrandRepository extends JpaRepository<CarBrandDto, Integer> {
 }

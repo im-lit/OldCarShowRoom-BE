@@ -18,13 +18,13 @@ public class CarImageController {
     private final CarImageService carImageService;
 
     @GetMapping("/{id}")
-    private ResponseEntity getCarImageByCarImageID(@PathVariable String id) {
+    private ResponseEntity getCarImageByCarImageID(@PathVariable int id) {
         CarImageEntity listEntity = carImageService.getCarImageByCarImageID(id);
         return ResponseEntity.ok().body(listEntity);
     }
 
     @GetMapping("/carID/{id}")
-    private ResponseEntity getCarImageByCarID(@PathVariable String carID) {
+    private ResponseEntity getCarImageByCarID(@PathVariable int carID) {
         List<CarImageEntity> entity = carImageService.getCarImageByCarID(carID);
         return ResponseEntity.ok().body(entity);
     }
@@ -36,12 +36,12 @@ public class CarImageController {
     }
 
     @PutMapping
-    private ResponseEntity updateExistedCarImage(@RequestParam String id,@RequestBody CarImageEntity entity) {
+    private ResponseEntity updateExistedCarImage(@RequestParam int id,@RequestBody CarImageEntity entity) {
         return ResponseEntity.ok().body(carImageService.updateExistedCarImage(id, entity));
     }
 
     @DeleteMapping()
-    private ResponseEntity deleteExistedCarImage(@RequestParam String id) {
+    private ResponseEntity deleteExistedCarImage(@RequestParam int id) {
         return ResponseEntity.ok().body(carImageService.deleteExistedCarImage(id));
     }
 

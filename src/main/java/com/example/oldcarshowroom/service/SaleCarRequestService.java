@@ -21,27 +21,25 @@ public class SaleCarRequestService {
 
     private final ShowroomRepository showroomRepository;
 
-    public boolean isExisted(String id) {
-        return saleCarRequestRepository.existsById(id);
-    }
 
-    public SaleCarRequestEntity getSaleCarBySaleCarID(String id) {
+
+    public SaleCarRequestEntity getSaleCarBySaleCarID(int id) {
         return SaleCarRequestEntity.fromSaleCarRequestDto(saleCarRequestRepository.getById(id));
     }
 
-    public List<SaleCarRequestEntity> getSaleCarByShowRoomID(String id) {
+    public List<SaleCarRequestEntity> getSaleCarByShowRoomID(int id) {
         return saleCarRequestRepository.getSaleCarByShowRoomID(id).stream()
                 .map(SaleCarRequestEntity::fromSaleCarRequestDto)
                 .collect(Collectors.toList());
     }
 
-    public List<SaleCarRequestEntity> getSaleCarByUserID(String id) {
+    public List<SaleCarRequestEntity> getSaleCarByUserID(int id) {
         return saleCarRequestRepository.getSaleCarByUserID(id).stream()
                 .map(SaleCarRequestEntity::fromSaleCarRequestDto)
                 .collect(Collectors.toList());
     }
 
-    public List<SaleCarRequestEntity> getSaleCarByCarID(String id) {
+    public List<SaleCarRequestEntity> getSaleCarByCarID(int id) {
         return saleCarRequestRepository.getSaleCarByCarID(id).stream()
                 .map(SaleCarRequestEntity::fromSaleCarRequestDto)
                 .collect(Collectors.toList());
@@ -51,28 +49,28 @@ public class SaleCarRequestService {
         SaleCarRequestDto dto = SaleCarRequestDto.builder()
                 .status(entity.isStatus())
                 .date(entity.getDate())
-                .userDto(userRepository.findById(String.valueOf(entity.getUserID())).orElseThrow())
-                .carDto(carRepository.findById(String.valueOf(entity.getCarID())).orElseThrow())
-                .showroomDto(showroomRepository.findById(String.valueOf(entity.getShowroomID())).orElseThrow())
+                .userDto(userRepository.findById(entity.getUserID()).orElseThrow())
+                .carDto(carRepository.findById(entity.getCarID()).orElseThrow())
+                .showroomDto(showroomRepository.findById(entity.getShowroomID()).orElseThrow())
                 .build();
 
         return SaleCarRequestEntity.fromSaleCarRequestDto(dto);
     }
 
 
-    public SaleCarRequestEntity updateExistedSaleCarRequest(String id, SaleCarRequestEntity entity) {
+    public SaleCarRequestEntity updateExistedSaleCarRequest(int id, SaleCarRequestEntity entity) {
         SaleCarRequestDto dto = saleCarRequestRepository.findById(id).orElseThrow();
 
         dto.setDate(entity.getDate());
         dto.setStatus(entity.isStatus());
-        dto.setCarDto(carRepository.findById(String.valueOf(entity.getUserID())).orElseThrow());
-        dto.setUserDto(userRepository.findById(String.valueOf(entity.getUserID())).orElseThrow());
-        dto.setShowroomDto(showroomRepository.findById(String.valueOf(entity.getShowroomID())).orElseThrow());
+        dto.setCarDto(carRepository.findById(entity.getUserID()).orElseThrow());
+        dto.setUserDto(userRepository.findById(entity.getUserID()).orElseThrow());
+        dto.setShowroomDto(showroomRepository.findById(entity.getShowroomID()).orElseThrow());
 
         return SaleCarRequestEntity.fromSaleCarRequestDto(saleCarRequestRepository.save(dto));
     }
 
-    public SaleCarRequestEntity deleteExistedSaleCarRequest(String id) {
+    public SaleCarRequestEntity deleteExistedSaleCarRequest(int id) {
         SaleCarRequestDto dto = saleCarRequestRepository.findById(id).orElseThrow();
         saleCarRequestRepository.deleteById(id);
         return SaleCarRequestEntity.fromSaleCarRequestDto(dto);

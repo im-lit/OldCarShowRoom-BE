@@ -10,13 +10,13 @@ import com.example.oldcarshowroom.model.dto.UserDto;
 import java.util.List;
 
 @Repository
-public interface CarRepository extends JpaRepository<CarDto, String> {
+public interface CarRepository extends JpaRepository<CarDto, Integer> {
 
     @Query("select dto from CarDto dto where dto.showroomDto.showroomID = ?1")
-    List<CarDto> getCarByShowRoomID(String id);
+    List<CarDto> getCarByShowRoomID(int id);
 
     @Query("select dto from CarDto dto where dto.userDto.userID = ?1")
-    List<CarDto> getCarByUserID(String id);
+    List<CarDto> getCarByUserID(int id);
 
     @Query("select dto from CarDto dto where dto.carStatus = 'CAN_SALE'")
     List<CarDto> getAllCarCanSale();

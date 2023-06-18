@@ -24,7 +24,7 @@ public class RoleController {
     }
 
     @GetMapping("/{id}")
-    private ResponseEntity getRoleByRoleID(@PathVariable String id) {
+    private ResponseEntity getRoleByRoleID(@PathVariable int id) {
         RoleEntity entity = roleService.getRoleByRoleID(id);
         return ResponseEntity.ok().body(entity);
     }
@@ -35,12 +35,12 @@ public class RoleController {
     }
 
     @PutMapping
-    private ResponseEntity updateExistedRole(@RequestParam String id,@RequestBody RoleEntity entity) {
+    private ResponseEntity updateExistedRole(@RequestParam int id,@RequestBody RoleEntity entity) {
         return ResponseEntity.ok().body(roleService.updateExistedRole(id, entity));
     }
 
     @DeleteMapping()
-    private ResponseEntity deleteExistedRole(@RequestParam String id) {
+    private ResponseEntity deleteExistedRole(@RequestParam int id) {
         return ResponseEntity.ok().body(roleService.deleteExistedRole(id));
     }
 

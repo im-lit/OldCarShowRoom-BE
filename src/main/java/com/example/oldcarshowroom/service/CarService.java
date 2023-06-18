@@ -26,21 +26,19 @@ public class CarService {
 
     private final CarTypeRepository carTypeRepository;
 
-    public boolean isExisted(String id) {
-        return carRepository.existsById(id);
-    }
 
-    public CarEntity getCarByCarID(String id) {
+
+    public CarEntity getCarByCarID(int id) {
         return CarEntity.fromCarDto(carRepository.getById(id));
     }
 
-    public List<CarEntity> getCarByShowroomID(String id) {
+    public List<CarEntity> getCarByShowroomID(int id) {
         return carRepository.getCarByShowRoomID(id).stream()
                 .map(CarEntity::fromCarDto)
                 .collect(Collectors.toList());
     }
 
-    public List<CarEntity> getCarByUserID(String id) {
+    public List<CarEntity> getCarByUserID(int id) {
         return carRepository.getCarByUserID(id).stream()
                 .map(CarEntity::fromCarDto)
                 .collect(Collectors.toList());
@@ -55,43 +53,43 @@ public class CarService {
     public CarEntity createNewCar(CarEntity entity) {
         CarDto dto = CarDto.builder()
                 .carName(entity.getCarName())
-                .carBrandDto(carBrandRepository.findById(String.valueOf(entity.getCarBrandID())).orElseThrow())
+                .carBrandDto(carBrandRepository.findById(entity.getCarBrandID()).orElseThrow())
                 .carPrice(entity.getCarPrice())
-                .carTypeDto(carTypeRepository.findById(String.valueOf(entity.getCarTypeID())).orElseThrow())
+                .carTypeDto(carTypeRepository.findById(entity.getCarTypeID()).orElseThrow())
                 .yearOfRegistration(entity.getYearOfRegistration())
                 .carOdo(entity.getCarOdo())
                 .carOrigin(entity.getCarOrigin())
                 .carDescription(entity.getCarDescription())
                 .carCondition(entity.getCarCondition())
                 .carStatus(CarDto.CarStatus.valueOf(entity.getCarStatus()))
-                .userDto(userRepository.findById(String.valueOf(entity.getUserID())).orElseThrow())
-                .showroomDto(showroomRepository.findById(String.valueOf(entity.getShowroomID())).orElseThrow())
+                .userDto(userRepository.findById(entity.getUserID()).orElseThrow())
+                .showroomDto(showroomRepository.findById(entity.getShowroomID()).orElseThrow())
                 .build();
 
         return CarEntity.fromCarDto(carRepository.save(dto));
     }
 
 
-    public CarEntity updateExistedCar(String id, CarEntity entity) {
+    public CarEntity updateExistedCar(int id, CarEntity entity) {
         CarDto dto = carRepository.findById(id).orElseThrow();
 
         dto.setCarName(entity.getCarName());
-        dto.setCarBrandDto(carBrandRepository.findById(String.valueOf(entity.getCarBrandID())).orElseThrow());
+        dto.setCarBrandDto(carBrandRepository.findById(entity.getCarBrandID()).orElseThrow());
         dto.setCarPrice(entity.getCarPrice());
-        dto.setCarTypeDto(carTypeRepository.findById(String.valueOf(entity.getCarTypeID())).orElseThrow());
+        dto.setCarTypeDto(carTypeRepository.findById(entity.getCarTypeID()).orElseThrow());
         dto.setYearOfRegistration(entity.getYearOfRegistration());
         dto.setCarOdo(entity.getCarOdo());
         dto.setCarOrigin(entity.getCarOrigin());
         dto.setCarDescription(entity.getCarDescription());
         dto.setCarCondition(entity.getCarCondition());
         dto.setCarStatus(CarDto.CarStatus.valueOf(entity.getCarStatus()));
-        dto.setUserDto(userRepository.findById(String.valueOf(entity.getUserID())).orElseThrow());
-        dto.setShowroomDto(showroomRepository.findById(String.valueOf(entity.getShowroomID())).orElseThrow());
+        dto.setUserDto(userRepository.findById(entity.getUserID()).orElseThrow());
+        dto.setShowroomDto(showroomRepository.findById(entity.getShowroomID()).orElseThrow());
 
         return CarEntity.fromCarDto(carRepository.save(dto));
     }
 
-    public CarEntity deleteExistedCar(String id) {
+    public CarEntity deleteExistedCar(int id) {
         CarDto dto = carRepository.findById(id).orElseThrow();
         carRepository.deleteById(id);
         return CarEntity.fromCarDto(dto);

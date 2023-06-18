@@ -22,7 +22,7 @@ public class UserController {
 
 
     @GetMapping("/{id}")
-    private ResponseEntity getUserByUserID(@PathVariable String id) {
+    private ResponseEntity getUserByUserID(@PathVariable int id) {
         UserEntity entity = userService.getUserByUserID(id);
         return ResponseEntity.ok().body(entity);
     }
@@ -47,13 +47,13 @@ public class UserController {
     }
 
     @PutMapping
-    private ResponseEntity updateExistedUser(@RequestParam String id ,
+    private ResponseEntity updateExistedUser(@RequestParam int id ,
                                              @RequestBody UserEntity entity) {
         return ResponseEntity.ok().body(userService.updateExistedUser(id, entity));
     }
 
     @DeleteMapping()
-    private ResponseEntity deleteExistedUser(@RequestParam String id) {
+    private ResponseEntity deleteExistedUser(@RequestParam int id) {
         return ResponseEntity.ok().body(userService.deleteExistedUser(id));
     }
 }

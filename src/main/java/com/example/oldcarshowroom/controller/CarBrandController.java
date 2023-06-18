@@ -22,7 +22,7 @@ public class CarBrandController {
     }
 
     @GetMapping("/{id}")
-    private ResponseEntity getCarBrandByCarBrandID(@PathVariable String id) {
+    private ResponseEntity getCarBrandByCarBrandID(@PathVariable int id) {
         CarBrandEntity entity = carBrandService.getCarBrandByCarBrandID(id);
         return ResponseEntity.ok().body(entity);
     }
@@ -33,12 +33,12 @@ public class CarBrandController {
     }
 
     @PutMapping
-    private ResponseEntity updateExistedCarBrand(@RequestParam String id, @RequestBody CarBrandEntity entity) {
+    private ResponseEntity updateExistedCarBrand(@RequestParam int id, @RequestBody CarBrandEntity entity) {
         return ResponseEntity.ok().body(carBrandService.updateExistedCarBrand(id, entity));
     }
 
     @DeleteMapping()
-    private ResponseEntity deleteExistedCarBrand(@RequestParam String id) {
+    private ResponseEntity deleteExistedCarBrand(@RequestParam int id) {
         return ResponseEntity.ok().body(carBrandService.deleteExistedCarBrand(id));
     }
 }

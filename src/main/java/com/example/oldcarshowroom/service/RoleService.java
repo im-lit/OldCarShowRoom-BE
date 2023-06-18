@@ -16,9 +16,7 @@ import java.util.stream.Collectors;
 public class RoleService {
     private final RoleRepository roleRepository;
 
-    public boolean isExisted(String id) {
-        return roleRepository.existsById(id);
-    }
+
 
     public RoleEntity createNewRole(RoleEntity entity) {
         RoleDto dto = RoleDto.builder()
@@ -35,7 +33,7 @@ public class RoleService {
                 .collect(Collectors.toList());
     }
 
-    public RoleEntity updateExistedRole(String id, RoleEntity entity) {
+    public RoleEntity updateExistedRole(int id, RoleEntity entity) {
         RoleDto dto = roleRepository.findById(id).orElseThrow();
 
 //        dto.setRoleID(entity.getRoleID());
@@ -44,14 +42,14 @@ public class RoleService {
         return RoleEntity.fromRoleDto(roleRepository.save(dto));
     }
 
-    public RoleEntity deleteExistedRole(String id) {
+    public RoleEntity deleteExistedRole(int id) {
         RoleDto dto = roleRepository.findById(id).orElseThrow();
         roleRepository.deleteById(id);
         return RoleEntity.fromRoleDto(dto);
     }
 
 
-    public RoleEntity getRoleByRoleID(String id) {
+    public RoleEntity getRoleByRoleID(int id) {
         return RoleEntity.fromRoleDto(roleRepository.getById(id));
     }
 }

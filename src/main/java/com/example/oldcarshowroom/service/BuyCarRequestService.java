@@ -25,27 +25,24 @@ public class BuyCarRequestService {
 
     private final ShowroomRepository showroomRepository;
 
-    public boolean isExisted(String id) {
-        return buyCarRequestRepository.existsById(id);
-    }
 
-    public BuyCarRequestEntity getBuyCarByBuyCarID(String id) {
+    public BuyCarRequestEntity getBuyCarByBuyCarID(int id) {
         return BuyCarRequestEntity.fromBuyCarRequestDto(buyCarRequestRepository.getById(id));
     }
 
-    public List<BuyCarRequestEntity> getBuyCarByShowroomID(String id) {
+    public List<BuyCarRequestEntity> getBuyCarByShowroomID(int id) {
         return buyCarRequestRepository.getBuyCarByShowRoomID(id).stream()
                 .map(BuyCarRequestEntity::fromBuyCarRequestDto)
                 .collect(Collectors.toList());
     }
 
-    public List<BuyCarRequestEntity> getBuyCarByUserID(String id) {
+    public List<BuyCarRequestEntity> getBuyCarByUserID(int id) {
         return buyCarRequestRepository.getBuyCarByUserID(id).stream()
                 .map(BuyCarRequestEntity::fromBuyCarRequestDto)
                 .collect(Collectors.toList());
     }
 
-    public List<BuyCarRequestEntity> getBuyCarByCarID(String id) {
+    public List<BuyCarRequestEntity> getBuyCarByCarID(int id) {
         return buyCarRequestRepository.getBuyCarByCarID(id).stream()
                 .map(BuyCarRequestEntity::fromBuyCarRequestDto)
                 .collect(Collectors.toList());
@@ -55,28 +52,28 @@ public class BuyCarRequestService {
         BuyCarRequestDto dto = BuyCarRequestDto.builder()
                 .status(entity.isStatus())
                 .date(entity.getDate())
-                .userDto(userRepository.findById(String.valueOf(entity.getUserID())).orElseThrow())
-                .carDto(carRepository.findById(String.valueOf(entity.getCarID())).orElseThrow())
-                .showroomDto(showroomRepository.findById(String.valueOf(entity.getShowroomID())).orElseThrow())
+                .userDto(userRepository.findById(entity.getUserID()).orElseThrow())
+                .carDto(carRepository.findById(entity.getCarID()).orElseThrow())
+                .showroomDto(showroomRepository.findById(entity.getShowroomID()).orElseThrow())
                 .build();
 
         return BuyCarRequestEntity.fromBuyCarRequestDto(dto);
     }
 
 
-    public BuyCarRequestEntity updateExistedBuyCarRequest(String id, BuyCarRequestEntity entity) {
+    public BuyCarRequestEntity updateExistedBuyCarRequest(int id, BuyCarRequestEntity entity) {
         BuyCarRequestDto dto = buyCarRequestRepository.findById(id).orElseThrow();
 
         dto.setDate(entity.getDate());
         dto.setStatus(entity.isStatus());
-        dto.setCarDto(carRepository.findById(String.valueOf(entity.getUserID())).orElseThrow());
-        dto.setUserDto(userRepository.findById(String.valueOf(entity.getUserID())).orElseThrow());
-        dto.setShowroomDto(showroomRepository.findById(String.valueOf(entity.getShowroomID())).orElseThrow());
+        dto.setCarDto(carRepository.findById(entity.getUserID()).orElseThrow());
+        dto.setUserDto(userRepository.findById(entity.getUserID()).orElseThrow());
+        dto.setShowroomDto(showroomRepository.findById(entity.getShowroomID()).orElseThrow());
 
         return BuyCarRequestEntity.fromBuyCarRequestDto(buyCarRequestRepository.save(dto));
     }
 
-    public BuyCarRequestEntity deleteExistedBuyCarRequest(String id) {
+    public BuyCarRequestEntity deleteExistedBuyCarRequest(int id) {
         BuyCarRequestDto dto = buyCarRequestRepository.findById(id).orElseThrow();
         buyCarRequestRepository.deleteById(id);
 

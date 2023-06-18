@@ -23,11 +23,9 @@ public class UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
 
-    public boolean isExisted(String id) {
-        return userRepository.existsById(id);
-    }
 
-    public UserEntity getUserByUserID(String id) {
+
+    public UserEntity getUserByUserID(int id) {
         return UserEntity.fromUserDto(userRepository.getById(id));
     }
 
@@ -40,14 +38,14 @@ public class UserService {
                 .address(entity.getAddress())
                 .avatarUrl(entity.getAvatarUrl())
                 .status(entity.isStatus())
-                .roleDto(roleRepository.findById(String.valueOf(entity.getRoleID())).orElseThrow())
+                .roleDto(roleRepository.findById(entity.getRoleID()).orElseThrow())
                 .build();
 
         return UserEntity.fromUserDto(userRepository.save(dto));
     }
 
 
-    public UserEntity updateExistedUser(String id, UserEntity entity) {
+    public UserEntity updateExistedUser(int id, UserEntity entity) {
         UserDto dto = userRepository.findById(id).orElseThrow();
 
         //dto.setUserID(entity.getUserID());
@@ -58,12 +56,12 @@ public class UserService {
         dto.setAddress(entity.getAddress());
         dto.setAvatarUrl(entity.getAvatarUrl());
         dto.setStatus(entity.isStatus());
-        dto.setRoleDto(roleRepository.findById(String.valueOf(entity.getRoleID())).orElseThrow());
+        dto.setRoleDto(roleRepository.findById(entity.getRoleID()).orElseThrow());
 
         return UserEntity.fromUserDto(userRepository.save(dto));
     }
 
-    public UserEntity deleteExistedUser(String id) {
+    public UserEntity deleteExistedUser(int id) {
         UserDto dto = userRepository.findById(id).orElseThrow();
         userRepository.deleteById(id);
         return UserEntity.fromUserDto(dto);

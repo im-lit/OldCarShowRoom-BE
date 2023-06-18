@@ -21,44 +21,42 @@ public class CarImageService {
 
     private final CarRepository carRepository;
 
-    public boolean isExisted(String id) {
-        return carImageRepository.existsById(id);
-    }
+
 
     public CarImageEntity createNewCarImage(CarImageEntity entity) {
         CarImageDto dto = CarImageDto.builder()
                 .imageUrl(entity.getImageUrl())
-                .carDto(carRepository.findById(String.valueOf(entity.getCarID())).orElseThrow())
+                .carDto(carRepository.findById(entity.getCarID()).orElseThrow())
                 .build();
 
         return CarImageEntity.fromCarImageDto(carImageRepository.save(dto));
     }
 
-    public List<CarImageEntity> getCarImageByCarID(String carID){
+    public List<CarImageEntity> getCarImageByCarID(int carID){
         return carImageRepository.getCarImageByCarID(carID).stream()
                 .map(CarImageEntity::fromCarImageDto)
                 .collect(Collectors.toList());
     }
 
 
-    public CarImageEntity updateExistedCarImage(String id, CarImageEntity entity) {
+    public CarImageEntity updateExistedCarImage(int id, CarImageEntity entity) {
         CarImageDto dto = carImageRepository.findById(id).orElseThrow();
 
 
         dto.setImageUrl(entity.getImageUrl());
-        dto.setCarDto(carRepository.findById(String.valueOf(entity.getCarID())).orElseThrow());
+        dto.setCarDto(carRepository.findById(entity.getCarID()).orElseThrow());
 
         return CarImageEntity.fromCarImageDto(carImageRepository.save(dto));
     }
 
-    public CarImageEntity deleteExistedCarImage(String id) {
+    public CarImageEntity deleteExistedCarImage(int id) {
         CarImageDto dto = carImageRepository.findById(id).orElseThrow();
         carImageRepository.deleteById(id);
         return CarImageEntity.fromCarImageDto(dto);
     }
 
 
-    public CarImageEntity getCarImageByCarImageID(String id) {
+    public CarImageEntity getCarImageByCarImageID(int id) {
         return CarImageEntity.fromCarImageDto(carImageRepository.getById(id));
     }
 }

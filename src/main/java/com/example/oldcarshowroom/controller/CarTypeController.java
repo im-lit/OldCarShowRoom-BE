@@ -24,7 +24,7 @@ public class CarTypeController {
     }
 
     @GetMapping("/{id}")
-    private ResponseEntity getCarTypeByCarTypeID(@PathVariable String id) {
+    private ResponseEntity getCarTypeByCarTypeID(@PathVariable int id) {
         CarTypeEntity entity = carTypeService.getCarTypeByCarTypeID(id);
         return ResponseEntity.ok().body(entity);
     }
@@ -35,12 +35,12 @@ public class CarTypeController {
     }
 
     @PutMapping
-    private ResponseEntity updateExistedCarType(@RequestParam String id, @RequestBody CarTypeEntity entity) {
+    private ResponseEntity updateExistedCarType(@RequestParam int id, @RequestBody CarTypeEntity entity) {
         return ResponseEntity.ok().body(carTypeService.updateExistedCarType(id, entity));
     }
 
     @DeleteMapping()
-    private ResponseEntity deleteExistedCarType(@RequestParam String id) {
+    private ResponseEntity deleteExistedCarType(@RequestParam int id) {
         return ResponseEntity.ok().body(carTypeService.deleteExistedCarType(id));
     }
 }

@@ -22,38 +22,36 @@ public class ShowroomService {
 
     private final UserRepository userRepository;
 
-    public boolean isExisted(String id) {
-        return showroomRepository.existsById(id);
-    }
+
 
     public ShowroomEntity createNewShowroom(ShowroomEntity entity) {
         ShowroomDto dto = ShowroomDto.builder()
                 .showroomName(entity.getShowroomName())
                 .showroomAddress(entity.getShowroomAddress())
                 .showroomPhone(entity.getShowroomPhone())
-                .userDto(userRepository.findById(String.valueOf(entity.getUserID())).orElseThrow())
+                .userDto(userRepository.findById(entity.getUserID()).orElseThrow())
                 .build();
 
         return ShowroomEntity.fromShowroomDto(showroomRepository.save(dto));
     }
 
 
-    public ShowroomEntity getShowroomByShowroomID(String id) {
+    public ShowroomEntity getShowroomByShowroomID(int id) {
         return ShowroomEntity.fromShowroomDto(showroomRepository.getById(id));
     }
 
-    public ShowroomEntity updateExistedShowroom(String id, ShowroomEntity entity) {
+    public ShowroomEntity updateExistedShowroom(int id, ShowroomEntity entity) {
         ShowroomDto dto = showroomRepository.findById(id).orElseThrow();
 
         dto.setShowroomName(entity.getShowroomName());
         dto.setShowroomAddress(entity.getShowroomAddress());
         dto.setShowroomPhone(entity.getShowroomPhone());
-        dto.setUserDto(userRepository.findById(String.valueOf(entity.getUserID())).orElseThrow());
+        dto.setUserDto(userRepository.findById(entity.getUserID()).orElseThrow());
 
         return ShowroomEntity.fromShowroomDto(showroomRepository.save(dto));
     }
 
-    public ShowroomEntity deleteExistedShowroom(String id) {
+    public ShowroomEntity deleteExistedShowroom(int id) {
         ShowroomDto dto = showroomRepository.findById(id).orElseThrow();
         showroomRepository.deleteById(id);
         return ShowroomEntity.fromShowroomDto(dto);

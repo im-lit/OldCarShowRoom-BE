@@ -18,25 +18,25 @@ public class SaleCarRequestController {
 
 
     @GetMapping("/{id}")
-    private ResponseEntity getSaleCarBySaleCarID(@PathVariable String id) {
+    private ResponseEntity getSaleCarBySaleCarID(@PathVariable int id) {
         SaleCarRequestEntity entity = saleCarRequestService.getSaleCarBySaleCarID(id);
         return ResponseEntity.ok().body(entity);
     }
 
     @GetMapping("/userid/{id}")
-    private ResponseEntity getSaleCarByUserID(@PathVariable String id){
+    private ResponseEntity getSaleCarByUserID(@PathVariable int id){
         List<SaleCarRequestEntity> entity = saleCarRequestService.getSaleCarByUserID(id);
         return ResponseEntity.ok().body(entity);
     }
 
     @GetMapping("/showroomid/{id}")
-    private ResponseEntity getSaleCarByShowRoomID(@PathVariable String id){
+    private ResponseEntity getSaleCarByShowRoomID(@PathVariable int id){
         List<SaleCarRequestEntity> entity = saleCarRequestService.getSaleCarByShowRoomID(id);
         return ResponseEntity.ok().body(entity);
     }
 
     @GetMapping("/carid/{id}")
-    private ResponseEntity getSaleCarByCarID(@PathVariable String id){
+    private ResponseEntity getSaleCarByCarID(@PathVariable int id){
         List<SaleCarRequestEntity> entity = saleCarRequestService.getSaleCarByCarID(id);
         return ResponseEntity.ok().body(entity);
     }
@@ -47,13 +47,13 @@ public class SaleCarRequestController {
     }
 
     @PutMapping
-    private ResponseEntity updateExistedSaleCarRequest(@RequestParam String id,
+    private ResponseEntity updateExistedSaleCarRequest(@RequestParam int id,
                                                        @RequestBody SaleCarRequestEntity entity) {
         return ResponseEntity.ok().body(saleCarRequestService.updateExistedSaleCarRequest(id, entity));
     }
 
     @DeleteMapping()
-    private ResponseEntity deleteExistedSaleCarRequest(@RequestParam String id) {
+    private ResponseEntity deleteExistedSaleCarRequest(@RequestParam int id) {
         return ResponseEntity.ok().body(saleCarRequestService.deleteExistedSaleCarRequest(id));
     }
 
