@@ -31,7 +31,7 @@ public class ShowroomService {
                 .showroomName(entity.getShowroomName())
                 .showroomAddress(entity.getShowroomAddress())
                 .showroomPhone(entity.getShowroomPhone())
-                .userDto(userRepository.findById(entity.getUserID()).orElseThrow())
+                .userDto(userRepository.findById(String.valueOf(entity.getUserID())).orElseThrow())
                 .build();
 
         return ShowroomEntity.fromShowroomDto(showroomRepository.save(dto));
@@ -48,7 +48,7 @@ public class ShowroomService {
         dto.setShowroomName(entity.getShowroomName());
         dto.setShowroomAddress(entity.getShowroomAddress());
         dto.setShowroomPhone(entity.getShowroomPhone());
-        dto.setUserDto(userRepository.findById(entity.getUserID()).orElseThrow());
+        dto.setUserDto(userRepository.findById(String.valueOf(entity.getUserID())).orElseThrow());
 
         return ShowroomEntity.fromShowroomDto(showroomRepository.save(dto));
     }

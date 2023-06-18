@@ -55,9 +55,9 @@ public class BuyCarRequestService {
         BuyCarRequestDto dto = BuyCarRequestDto.builder()
                 .status(entity.isStatus())
                 .date(entity.getDate())
-                .userDto(userRepository.findById(entity.getUserID()).orElseThrow())
-                .carDto(carRepository.findById(entity.getCarID()).orElseThrow())
-                .showroomDto(showroomRepository.findById(entity.getShowroomID()).orElseThrow())
+                .userDto(userRepository.findById(String.valueOf(entity.getUserID())).orElseThrow())
+                .carDto(carRepository.findById(String.valueOf(entity.getCarID())).orElseThrow())
+                .showroomDto(showroomRepository.findById(String.valueOf(entity.getShowroomID())).orElseThrow())
                 .build();
 
         return BuyCarRequestEntity.fromBuyCarRequestDto(dto);
@@ -69,9 +69,9 @@ public class BuyCarRequestService {
 
         dto.setDate(entity.getDate());
         dto.setStatus(entity.isStatus());
-        dto.setCarDto(carRepository.findById(entity.getUserID()).orElseThrow());
-        dto.setUserDto(userRepository.findById(entity.getUserID()).orElseThrow());
-        dto.setShowroomDto(showroomRepository.findById(entity.getShowroomID()).orElseThrow());
+        dto.setCarDto(carRepository.findById(String.valueOf(entity.getUserID())).orElseThrow());
+        dto.setUserDto(userRepository.findById(String.valueOf(entity.getUserID())).orElseThrow());
+        dto.setShowroomDto(showroomRepository.findById(String.valueOf(entity.getShowroomID())).orElseThrow());
 
         return BuyCarRequestEntity.fromBuyCarRequestDto(buyCarRequestRepository.save(dto));
     }

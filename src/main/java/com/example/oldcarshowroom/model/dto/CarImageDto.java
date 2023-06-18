@@ -18,7 +18,7 @@ public class CarImageDto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String carImageID;
+    private int carImageID;
 
     private String imageUrl;
 

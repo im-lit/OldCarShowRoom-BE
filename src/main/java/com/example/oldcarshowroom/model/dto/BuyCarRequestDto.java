@@ -17,7 +17,7 @@ import javax.persistence.*;
 public class BuyCarRequestDto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String buyCarID;
+    private int buyCarID;
 
     private boolean status;
 

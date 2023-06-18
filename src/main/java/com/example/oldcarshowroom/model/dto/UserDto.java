@@ -18,7 +18,7 @@ public class UserDto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String userID;
+    private int userID;
 
     private String userName;
 

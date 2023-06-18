@@ -43,9 +43,6 @@ public class UserController {
 
     @PostMapping()
     public ResponseEntity createNewUser(@RequestBody UserEntity entity) {
-        if(userService.isExisted(entity.getUserID())){
-            return ResponseEntity.badRequest().body("User Id is duplicated");
-        }
         return ResponseEntity.ok().body(userService.createNewUser(entity));
     }
 

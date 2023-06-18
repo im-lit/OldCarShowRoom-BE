@@ -17,7 +17,7 @@ import javax.persistence.*;
 public class ShowroomDto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String showroomID;
+    private int showroomID;
 
     private String showroomName;
 

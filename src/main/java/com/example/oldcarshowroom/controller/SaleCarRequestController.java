@@ -43,9 +43,6 @@ public class SaleCarRequestController {
 
     @PostMapping()
     public ResponseEntity createNewSaleCarRequest(@RequestBody SaleCarRequestEntity entity) {
-        if(saleCarRequestService.isExisted(entity.getSaleCarID())){
-            return ResponseEntity.badRequest().body("Sale Car Id is duplicated");
-        }
         return ResponseEntity.ok().body(saleCarRequestService.createNewSaleCarRequest(entity));
     }
 

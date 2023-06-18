@@ -29,9 +29,6 @@ public class ShowroomController {
 
     @PostMapping()
     public ResponseEntity createNewShowroom(@RequestBody ShowroomEntity entity) {
-        if(showroomService.isExisted(entity.getShowroomID())){
-            return ResponseEntity.badRequest().body("Showroom Id is duplicated");
-        }
         return ResponseEntity.ok().body(showroomService.createNewShowroom(entity));
     }
 

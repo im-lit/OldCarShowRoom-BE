@@ -12,11 +12,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CarImageEntity {
 
-    private String carImageID;
+    private int carImageID;
 
     private String imageUrl;
 
-    private String carID;
+    private int carID;
 
     public static CarImageEntity fromCarImageDto(CarImageDto dto){
         return CarImageEntity.builder()

@@ -31,9 +31,7 @@ public class CarImageController {
 
     @PostMapping()
     public ResponseEntity createNewCarImage(@RequestBody CarImageEntity entity) {
-        if(carImageService.isExisted(entity.getCarID())){
-            return ResponseEntity.badRequest().body("Car Id is duplicated");
-        }
+
         return ResponseEntity.ok().body(carImageService.createNewCarImage(entity));
     }
 

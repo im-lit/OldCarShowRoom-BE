@@ -1,6 +1,7 @@
 package com.example.oldcarshowroom.service;
 
 import lombok.RequiredArgsConstructor;
+import net.bytebuddy.utility.RandomString;
 import org.springframework.stereotype.Service;
 
 import com.example.oldcarshowroom.model.dto.RoleDto;
@@ -12,6 +13,7 @@ import com.example.oldcarshowroom.repository.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 @Service
@@ -38,7 +40,7 @@ public class UserService {
                 .address(entity.getAddress())
                 .avatarUrl(entity.getAvatarUrl())
                 .status(entity.isStatus())
-                .roleDto(roleRepository.findById(entity.getRoleID()).orElseThrow())
+                .roleDto(roleRepository.findById(String.valueOf(entity.getRoleID())).orElseThrow())
                 .build();
 
         return UserEntity.fromUserDto(userRepository.save(dto));
@@ -56,7 +58,7 @@ public class UserService {
         dto.setAddress(entity.getAddress());
         dto.setAvatarUrl(entity.getAvatarUrl());
         dto.setStatus(entity.isStatus());
-        dto.setRoleDto(roleRepository.findById(entity.getRoleID()).orElseThrow());
+        dto.setRoleDto(roleRepository.findById(String.valueOf(entity.getRoleID())).orElseThrow());
 
         return UserEntity.fromUserDto(userRepository.save(dto));
     }

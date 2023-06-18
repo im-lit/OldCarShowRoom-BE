@@ -55,17 +55,17 @@ public class CarService {
     public CarEntity createNewCar(CarEntity entity) {
         CarDto dto = CarDto.builder()
                 .carName(entity.getCarName())
-                .carBrandDto(carBrandRepository.findById(entity.getCarBrandID()).orElseThrow())
+                .carBrandDto(carBrandRepository.findById(String.valueOf(entity.getCarBrandID())).orElseThrow())
                 .carPrice(entity.getCarPrice())
-                .carTypeDto(carTypeRepository.findById(entity.getCarTypeID()).orElseThrow())
+                .carTypeDto(carTypeRepository.findById(String.valueOf(entity.getCarTypeID())).orElseThrow())
                 .yearOfRegistration(entity.getYearOfRegistration())
                 .carOdo(entity.getCarOdo())
                 .carOrigin(entity.getCarOrigin())
                 .carDescription(entity.getCarDescription())
                 .carCondition(entity.getCarCondition())
                 .carStatus(CarDto.CarStatus.valueOf(entity.getCarStatus()))
-                .userDto(userRepository.findById(entity.getUserID()).orElseThrow())
-                .showroomDto(showroomRepository.findById(entity.getShowroomID()).orElseThrow())
+                .userDto(userRepository.findById(String.valueOf(entity.getUserID())).orElseThrow())
+                .showroomDto(showroomRepository.findById(String.valueOf(entity.getShowroomID())).orElseThrow())
                 .build();
 
         return CarEntity.fromCarDto(carRepository.save(dto));
@@ -76,17 +76,17 @@ public class CarService {
         CarDto dto = carRepository.findById(id).orElseThrow();
 
         dto.setCarName(entity.getCarName());
-        dto.setCarBrandDto(carBrandRepository.findById(entity.getCarBrandID()).orElseThrow());
+        dto.setCarBrandDto(carBrandRepository.findById(String.valueOf(entity.getCarBrandID())).orElseThrow());
         dto.setCarPrice(entity.getCarPrice());
-        dto.setCarTypeDto(carTypeRepository.findById(entity.getCarTypeID()).orElseThrow());
+        dto.setCarTypeDto(carTypeRepository.findById(String.valueOf(entity.getCarTypeID())).orElseThrow());
         dto.setYearOfRegistration(entity.getYearOfRegistration());
         dto.setCarOdo(entity.getCarOdo());
         dto.setCarOrigin(entity.getCarOrigin());
         dto.setCarDescription(entity.getCarDescription());
         dto.setCarCondition(entity.getCarCondition());
         dto.setCarStatus(CarDto.CarStatus.valueOf(entity.getCarStatus()));
-        dto.setUserDto(userRepository.findById(entity.getUserID()).orElseThrow());
-        dto.setShowroomDto(showroomRepository.findById(entity.getShowroomID()).orElseThrow());
+        dto.setUserDto(userRepository.findById(String.valueOf(entity.getUserID())).orElseThrow());
+        dto.setShowroomDto(showroomRepository.findById(String.valueOf(entity.getShowroomID())).orElseThrow());
 
         return CarEntity.fromCarDto(carRepository.save(dto));
     }

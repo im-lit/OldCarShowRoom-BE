@@ -31,9 +31,6 @@ public class RoleController {
 
     @PostMapping()
     public ResponseEntity createNewRole(@RequestBody RoleEntity entity) {
-        if(roleService.isExisted(entity.getRoleID())){
-            return ResponseEntity.badRequest().body("Role Id is duplicated");
-        }
         return ResponseEntity.ok().body(roleService.createNewRole(entity));
     }
 

@@ -28,7 +28,7 @@ public class CarImageService {
     public CarImageEntity createNewCarImage(CarImageEntity entity) {
         CarImageDto dto = CarImageDto.builder()
                 .imageUrl(entity.getImageUrl())
-                .carDto(carRepository.findById(entity.getCarID()).orElseThrow())
+                .carDto(carRepository.findById(String.valueOf(entity.getCarID())).orElseThrow())
                 .build();
 
         return CarImageEntity.fromCarImageDto(carImageRepository.save(dto));
@@ -46,7 +46,7 @@ public class CarImageService {
 
 
         dto.setImageUrl(entity.getImageUrl());
-        dto.setCarDto(carRepository.findById(entity.getCarID()).orElseThrow());
+        dto.setCarDto(carRepository.findById(String.valueOf(entity.getCarID())).orElseThrow());
 
         return CarImageEntity.fromCarImageDto(carImageRepository.save(dto));
     }

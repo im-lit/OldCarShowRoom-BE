@@ -13,7 +13,8 @@ import com.example.oldcarshowroom.model.dto.UserDto;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserEntity {
-    private String userID;
+
+    private int userID;
 
     private String userName;
 
@@ -29,7 +30,7 @@ public class UserEntity {
 
     private boolean status;
 
-    private String roleID;
+    private int roleID;
 
     public static UserEntity fromUserDto(UserDto dto) {
         return UserEntity.builder()

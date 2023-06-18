@@ -29,9 +29,6 @@ public class CarBrandController {
 
     @PostMapping()
     public ResponseEntity createNewCarBrand(@RequestBody CarBrandEntity entity) {
-        if(carBrandService.isExisted(entity.getCarBrandID())){
-            return ResponseEntity.badRequest().body("Car Brand Id is duplicated");
-        }
         return ResponseEntity.ok().body(carBrandService.createNewCarBrand(entity));
     }
 

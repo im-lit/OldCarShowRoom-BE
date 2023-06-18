@@ -13,15 +13,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CarEntity {
 
-        private String carID;
+        private int carID;
 
         private String carName;
 
-        private String carBrandID;
+        private int carBrandID;
 
         private float carPrice;
 
-        private String carTypeID;
+        private int carTypeID;
 
         private int yearOfRegistration;
 
@@ -35,9 +35,9 @@ public class CarEntity {
 
         private String carStatus;
 
-        private String userID;
+        private int userID;
 
-        private String showroomID;
+        private int showroomID;
 
         public static CarEntity fromCarDto(CarDto dto) {
             return CarEntity.builder()
