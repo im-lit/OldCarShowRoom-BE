@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CarBrandEntity {
-    private String carBrandID;
+    private int carBrandID;
 
     private String carBrandName;
 

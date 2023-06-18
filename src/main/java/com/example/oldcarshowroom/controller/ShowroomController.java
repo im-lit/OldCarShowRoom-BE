@@ -27,26 +27,23 @@ public class ShowroomController {
 
 
     @GetMapping("/{id}")
-    private ResponseEntity getShowroomByShowroomID(@PathVariable String id) {
+    private ResponseEntity getShowroomByShowroomID(@PathVariable int id) {
         ShowroomEntity entity = showroomService.getShowroomByShowroomID(id);
         return ResponseEntity.ok().body(entity);
     }
 
     @PostMapping()
     public ResponseEntity createNewShowroom(@RequestBody ShowroomEntity entity) {
-        if(showroomService.isExisted(entity.getShowroomID())){
-            return ResponseEntity.badRequest().body("Showroom Id is duplicated");
-        }
         return ResponseEntity.ok().body(showroomService.createNewShowroom(entity));
     }
 
     @PutMapping
-    private ResponseEntity updateExistedShowroom(@RequestParam String id, @RequestBody ShowroomEntity entity) {
+    private ResponseEntity updateExistedShowroom(@RequestParam int id, @RequestBody ShowroomEntity entity) {
         return ResponseEntity.ok().body(showroomService.updateExistedShowroom(id, entity));
     }
 
     @DeleteMapping()
-    private ResponseEntity deleteExistedShowroom(@RequestParam String id) {
+    private ResponseEntity deleteExistedShowroom(@RequestParam int id) {
         return ResponseEntity.ok().body(showroomService.deleteExistedShowroom(id));
     }
 }

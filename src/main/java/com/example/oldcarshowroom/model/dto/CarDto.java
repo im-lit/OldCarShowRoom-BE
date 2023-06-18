@@ -17,7 +17,8 @@ import javax.persistence.*;
 public class CarDto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String carID;
+    private int carID;
+  
     @Column(name = "car_name", columnDefinition = "nvarchar(250)", nullable = true)
     private String carName;
 

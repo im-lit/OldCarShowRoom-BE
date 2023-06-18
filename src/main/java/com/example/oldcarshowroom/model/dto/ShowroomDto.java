@@ -17,8 +17,8 @@ import javax.persistence.*;
 public class ShowroomDto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String showroomID;
-    
+    private int showroomID;
+  
     @Column(name = "showroom_name", columnDefinition = "nvarchar(255)", nullable = true)
     private String showroomName;
     

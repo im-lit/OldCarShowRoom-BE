@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CarTypeEntity {
 
-    private String carTypeID;
+    private int carTypeID;
 
     private String carTypeName;
 

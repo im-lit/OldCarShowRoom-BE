@@ -13,17 +13,17 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class BuyCarRequestEntity {
 
-    private String buyCarID;
+    private int buyCarID;
 
     private boolean status;
 
     private String date;
 
-    private String userID;
+    private int userID;
 
-    private String carID;
+    private int carID;
 
-    private String showroomID;
+    private int showroomID;
 
     public static BuyCarRequestEntity fromBuyCarRequestDto(BuyCarRequestDto dto) {
         return BuyCarRequestEntity.builder()

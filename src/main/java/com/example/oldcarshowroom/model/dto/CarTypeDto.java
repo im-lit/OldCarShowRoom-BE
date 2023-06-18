@@ -16,7 +16,7 @@ import javax.persistence.*;
 public class CarTypeDto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String carTypeID;
+    private int carTypeID;
 
     private String carTypeName;
 }

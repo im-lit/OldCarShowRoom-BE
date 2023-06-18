@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import com.example.oldcarshowroom.model.dto.RoleDto;
 
 @Repository
-public interface RoleRepository extends JpaRepository<RoleDto,String> {
+public interface RoleRepository extends JpaRepository<RoleDto, Integer> {
 
 }

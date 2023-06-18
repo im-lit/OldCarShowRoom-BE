@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class RoleEntity {
 
-    private String roleID;
+    private int roleID;
 
     private String roleName;
 

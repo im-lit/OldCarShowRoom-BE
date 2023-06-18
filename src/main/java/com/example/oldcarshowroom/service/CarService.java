@@ -26,21 +26,19 @@ public class CarService {
 
     private final CarTypeRepository carTypeRepository;
 
-    public boolean isExisted(String id) {
-        return carRepository.existsById(id);
-    }
 
-    public CarEntity getCarByCarID(String id) {
+
+    public CarEntity getCarByCarID(int id) {
         return CarEntity.fromCarDto(carRepository.getById(id));
     }
 
-    public List<CarEntity> getCarByShowroomID(String id) {
+    public List<CarEntity> getCarByShowroomID(int id) {
         return carRepository.getCarByShowRoomID(id).stream()
                 .map(CarEntity::fromCarDto)
                 .collect(Collectors.toList());
     }
 
-    public List<CarEntity> getCarByUserID(String id) {
+    public List<CarEntity> getCarByUserID(int id) {
         return carRepository.getCarByUserID(id).stream()
                 .map(CarEntity::fromCarDto)
                 .collect(Collectors.toList());
@@ -72,7 +70,7 @@ public class CarService {
     }
 
 
-    public CarEntity updateExistedCar(String id, CarEntity entity) {
+    public CarEntity updateExistedCar(int id, CarEntity entity) {
         CarDto dto = carRepository.findById(id).orElseThrow();
 
         dto.setCarName(entity.getCarName());
@@ -91,7 +89,7 @@ public class CarService {
         return CarEntity.fromCarDto(carRepository.save(dto));
     }
 
-    public CarEntity deleteExistedCar(String id) {
+    public CarEntity deleteExistedCar(int id) {
         CarDto dto = carRepository.findById(id).orElseThrow();
         carRepository.deleteById(id);
         return CarEntity.fromCarDto(dto);

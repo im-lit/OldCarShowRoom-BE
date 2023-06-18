@@ -1,6 +1,7 @@
 package com.example.oldcarshowroom.service;
 
 import lombok.RequiredArgsConstructor;
+import net.bytebuddy.utility.RandomString;
 import org.springframework.stereotype.Service;
 
 import com.example.oldcarshowroom.model.dto.RoleDto;
@@ -12,6 +13,7 @@ import com.example.oldcarshowroom.repository.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 @Service
@@ -21,11 +23,9 @@ public class UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
 
-    public boolean isExisted(String id) {
-        return userRepository.existsById(id);
-    }
 
-    public UserEntity getUserByUserID(String id) {
+
+    public UserEntity getUserByUserID(int id) {
         return UserEntity.fromUserDto(userRepository.getById(id));
     }
 
@@ -45,7 +45,7 @@ public class UserService {
     }
 
 
-    public UserEntity updateExistedUser(String id, UserEntity entity) {
+    public UserEntity updateExistedUser(int id, UserEntity entity) {
         UserDto dto = userRepository.findById(id).orElseThrow();
 
         //dto.setUserID(entity.getUserID());
@@ -61,7 +61,7 @@ public class UserService {
         return UserEntity.fromUserDto(userRepository.save(dto));
     }
 
-    public UserEntity deleteExistedUser(String id) {
+    public UserEntity deleteExistedUser(int id) {
         UserDto dto = userRepository.findById(id).orElseThrow();
         userRepository.deleteById(id);
         return UserEntity.fromUserDto(dto);
