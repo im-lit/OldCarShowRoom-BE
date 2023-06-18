@@ -18,10 +18,14 @@ public class ShowroomDto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int showroomID;
-
+  
+    @Column(name = "showroom_name", columnDefinition = "nvarchar(255)", nullable = true)
     private String showroomName;
-
+    
+    @Column(name = "showroom_address", columnDefinition = "nvarchar(255)", nullable = true)
     private String showroomAddress;
+    
+    private String showroomAvatar;
 
     private String showroomPhone;
 

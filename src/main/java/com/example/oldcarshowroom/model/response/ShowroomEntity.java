@@ -20,12 +20,15 @@ public class ShowroomEntity {
     private String showroomAddress;
 
     private String showroomPhone;
+    
+    private String showroomAvatar;
 
     private int userID;
 
     public static ShowroomEntity fromShowroomDto(ShowroomDto dto) {
         return ShowroomEntity.builder()
                 .showroomID(dto.getShowroomID())
+                .showroomAvatar(dto.getShowroomAvatar())
                 .showroomName(dto.getShowroomName())
                 .showroomAddress(dto.getShowroomAddress())
                 .showroomPhone(dto.getShowroomPhone())

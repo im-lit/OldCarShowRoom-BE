@@ -23,11 +23,13 @@ public class UserDto {
     private String userName;
 
     private String password;
-
+    
+    @Column(name = "full_name", columnDefinition = "nvarchar(255)", nullable = true)
     private String fullName;
 
     private String phone;
-
+    	
+    @Column(name = "address", columnDefinition = "nvarchar(255)", nullable = true)
     private String address;
 
     private String avatarUrl;

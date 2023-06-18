@@ -18,7 +18,8 @@ public class CarDto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int carID;
-
+  
+    @Column(name = "car_name", columnDefinition = "nvarchar(250)", nullable = true)
     private String carName;
 
     //private String carBrand;
@@ -30,16 +31,20 @@ public class CarDto {
     private int yearOfRegistration;
 
     private int carOdo;
-
+    
+    @Column(name = "car_origin", columnDefinition = "nvarchar(50)", nullable = true)
     private String carOrigin;
-
+    
+    @Column(name = "car_description", columnDefinition = "nvarchar(255)", nullable = true)
     private String carDescription;
-
+    
+    @Column(name = "car_condition", columnDefinition = "nvarchar(50)", nullable = true)
     private String carCondition;
+    
     @Enumerated(EnumType.STRING)
-
-
     private CarStatus carStatus;
+    
+    private String carAvatar;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userID")
