@@ -17,6 +17,8 @@ public class ShowroomResponseEntity {
     private String showroomName;
 
     private String showroomAddress;
+    
+    private String showroomDescription;
 
     private String showroomPhone;
     
@@ -28,6 +30,7 @@ public class ShowroomResponseEntity {
         return ShowroomResponseEntity.builder()
                 .showroomID(dto.getShowroomID())
                 .showroomAvatar(dto.getShowroomAvatar())
+                .showroomDescription(dto.getShowroomDescription())
                 .showroomName(dto.getShowroomName())
                 .showroomAddress(dto.getShowroomAddress())
                 .showroomPhone(dto.getShowroomPhone())
