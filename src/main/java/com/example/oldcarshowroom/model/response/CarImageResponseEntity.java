@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CarImageEntity {
+public class CarImageResponseEntity {
 
     private int carImageID;
 
@@ -18,8 +18,8 @@ public class CarImageEntity {
 
     private int carID;
 
-    public static CarImageEntity fromCarImageDto(CarImageDto dto){
-        return CarImageEntity.builder()
+    public static CarImageResponseEntity fromCarImageDto(CarImageDto dto){
+        return CarImageResponseEntity.builder()
                 .carImageID(dto.getCarImageID())
                 .imageUrl(dto.getImageUrl())
                 .carID(dto.getCarDto().getCarID())

@@ -10,14 +10,14 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CarTypeEntity {
+public class CarTypeResponseEntity {
 
     private int carTypeID;
 
     private String carTypeName;
 
-    public static CarTypeEntity fromCarTypeDto(CarTypeDto dto) {
-        return CarTypeEntity.builder()
+    public static CarTypeResponseEntity fromCarTypeDto(CarTypeDto dto) {
+        return CarTypeResponseEntity.builder()
                 .carTypeID(dto.getCarTypeID())
                 .carTypeName(dto.getCarTypeName())
                 .build();

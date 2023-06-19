@@ -1,11 +1,11 @@
 package com.example.oldcarshowroom.controller;
 
+import com.example.oldcarshowroom.model.request.RoleRequestEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.oldcarshowroom.model.dto.RoleDto;
-import com.example.oldcarshowroom.model.response.RoleEntity;
+import com.example.oldcarshowroom.model.response.RoleResponseEntity;
 import com.example.oldcarshowroom.service.RoleService;
 
 import java.util.List;
@@ -19,23 +19,23 @@ public class RoleController {
 
     @GetMapping
     private ResponseEntity getAllRoles() {
-        List<RoleEntity> listEntity = roleService.getAllRoles();
+        List<RoleResponseEntity> listEntity = roleService.getAllRoles();
         return ResponseEntity.ok().body(listEntity);
     }
 
     @GetMapping("/{id}")
     private ResponseEntity getRoleByRoleID(@PathVariable int id) {
-        RoleEntity entity = roleService.getRoleByRoleID(id);
+        RoleResponseEntity entity = roleService.getRoleByRoleID(id);
         return ResponseEntity.ok().body(entity);
     }
 
     @PostMapping()
-    public ResponseEntity createNewRole(@RequestBody RoleEntity entity) {
+    public ResponseEntity createNewRole(@RequestBody RoleRequestEntity entity) {
         return ResponseEntity.ok().body(roleService.createNewRole(entity));
     }
 
     @PutMapping
-    private ResponseEntity updateExistedRole(@RequestParam int id,@RequestBody RoleEntity entity) {
+    private ResponseEntity updateExistedRole(@RequestParam int id,@RequestBody RoleRequestEntity entity) {
         return ResponseEntity.ok().body(roleService.updateExistedRole(id, entity));
     }
 

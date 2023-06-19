@@ -1,19 +1,15 @@
 package com.example.oldcarshowroom.service;
 
+import com.example.oldcarshowroom.model.request.UserRequestEntity;
 import lombok.RequiredArgsConstructor;
-import net.bytebuddy.utility.RandomString;
 import org.springframework.stereotype.Service;
 
-import com.example.oldcarshowroom.model.dto.RoleDto;
 import com.example.oldcarshowroom.model.dto.UserDto;
-import com.example.oldcarshowroom.model.response.RoleEntity;
-import com.example.oldcarshowroom.model.response.UserEntity;
+import com.example.oldcarshowroom.model.response.UserResponseEntity;
 import com.example.oldcarshowroom.repository.RoleRepository;
 import com.example.oldcarshowroom.repository.UserRepository;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,11 +21,11 @@ public class UserService {
 
 
 
-    public UserEntity getUserByUserID(int id) {
-        return UserEntity.fromUserDto(userRepository.getById(id));
+    public UserResponseEntity getUserByUserID(int id) {
+        return UserResponseEntity.fromUserDto(userRepository.getById(id));
     }
 
-    public UserEntity createNewUser(UserEntity entity) {
+    public UserResponseEntity createNewUser(UserRequestEntity entity) {
         UserDto dto = UserDto.builder()
                 .userName(entity.getUserName())
                 .password(entity.getPassword())
@@ -41,11 +37,11 @@ public class UserService {
                 .roleDto(roleRepository.findById(entity.getRoleID()).orElseThrow())
                 .build();
 
-        return UserEntity.fromUserDto(userRepository.save(dto));
+        return UserResponseEntity.fromUserDto(userRepository.save(dto));
     }
 
 
-    public UserEntity updateExistedUser(int id, UserEntity entity) {
+    public UserResponseEntity updateExistedUser(int id, UserRequestEntity entity) {
         UserDto dto = userRepository.findById(id).orElseThrow();
 
         //dto.setUserID(entity.getUserID());
@@ -58,24 +54,24 @@ public class UserService {
         dto.setStatus(entity.isStatus());
         dto.setRoleDto(roleRepository.findById(entity.getRoleID()).orElseThrow());
 
-        return UserEntity.fromUserDto(userRepository.save(dto));
+        return UserResponseEntity.fromUserDto(userRepository.save(dto));
     }
 
-    public UserEntity deleteExistedUser(int id) {
+    public UserResponseEntity deleteExistedUser(int id) {
         UserDto dto = userRepository.findById(id).orElseThrow();
         userRepository.deleteById(id);
-        return UserEntity.fromUserDto(dto);
+        return UserResponseEntity.fromUserDto(dto);
     }
 
-    public UserEntity checkLogin(String userName, String password) {
+    public UserResponseEntity checkLogin(String userName, String password) {
         //123213
-        return UserEntity.fromUserDto(userRepository.checkLoginUserByUserIdAndPassword(userName, password));
+        return UserResponseEntity.fromUserDto(userRepository.checkLoginUserByUserIdAndPassword(userName, password));
 
     }
 
-    public List<UserEntity> getAllUser(){
+    public List<UserResponseEntity> getAllUser(){
         return userRepository.findAll().stream()
-                .map(UserEntity::fromUserDto)
+                .map(UserResponseEntity::fromUserDto)
                 .collect(Collectors.toList());
     }
 

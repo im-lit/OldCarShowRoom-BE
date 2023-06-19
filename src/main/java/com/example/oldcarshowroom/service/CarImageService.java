@@ -1,12 +1,10 @@
 package com.example.oldcarshowroom.service;
 
 import com.example.oldcarshowroom.model.dto.CarImageDto;
-import com.example.oldcarshowroom.model.dto.RoleDto;
-import com.example.oldcarshowroom.model.response.CarImageEntity;
-import com.example.oldcarshowroom.model.response.RoleEntity;
+import com.example.oldcarshowroom.model.request.CarImageRequestEntity;
+import com.example.oldcarshowroom.model.response.CarImageResponseEntity;
 import com.example.oldcarshowroom.repository.CarImageRepository;
 import com.example.oldcarshowroom.repository.CarRepository;
-import com.example.oldcarshowroom.repository.RoleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,40 +21,40 @@ public class CarImageService {
 
 
 
-    public CarImageEntity createNewCarImage(CarImageEntity entity) {
+    public CarImageResponseEntity createNewCarImage(CarImageRequestEntity entity) {
         CarImageDto dto = CarImageDto.builder()
                 .imageUrl(entity.getImageUrl())
                 .carDto(carRepository.findById(entity.getCarID()).orElseThrow())
                 .build();
 
-        return CarImageEntity.fromCarImageDto(carImageRepository.save(dto));
+        return CarImageResponseEntity.fromCarImageDto(carImageRepository.save(dto));
     }
 
-    public List<CarImageEntity> getCarImageByCarID(int carID){
+    public List<CarImageResponseEntity> getCarImageByCarID(int carID){
         return carImageRepository.getCarImageByCarID(carID).stream()
-                .map(CarImageEntity::fromCarImageDto)
+                .map(CarImageResponseEntity::fromCarImageDto)
                 .collect(Collectors.toList());
     }
 
 
-    public CarImageEntity updateExistedCarImage(int id, CarImageEntity entity) {
+    public CarImageResponseEntity updateExistedCarImage(int id, CarImageRequestEntity entity) {
         CarImageDto dto = carImageRepository.findById(id).orElseThrow();
 
 
         dto.setImageUrl(entity.getImageUrl());
         dto.setCarDto(carRepository.findById(entity.getCarID()).orElseThrow());
 
-        return CarImageEntity.fromCarImageDto(carImageRepository.save(dto));
+        return CarImageResponseEntity.fromCarImageDto(carImageRepository.save(dto));
     }
 
-    public CarImageEntity deleteExistedCarImage(int id) {
+    public CarImageResponseEntity deleteExistedCarImage(int id) {
         CarImageDto dto = carImageRepository.findById(id).orElseThrow();
         carImageRepository.deleteById(id);
-        return CarImageEntity.fromCarImageDto(dto);
+        return CarImageResponseEntity.fromCarImageDto(dto);
     }
 
 
-    public CarImageEntity getCarImageByCarImageID(int id) {
-        return CarImageEntity.fromCarImageDto(carImageRepository.getById(id));
+    public CarImageResponseEntity getCarImageByCarImageID(int id) {
+        return CarImageResponseEntity.fromCarImageDto(carImageRepository.getById(id));
     }
 }

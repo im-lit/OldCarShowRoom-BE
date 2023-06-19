@@ -1,6 +1,7 @@
 package com.example.oldcarshowroom.controller;
 
-import com.example.oldcarshowroom.model.response.SaleCarRequestEntity;
+import com.example.oldcarshowroom.model.request.SaleCarRequestRequestEntity;
+import com.example.oldcarshowroom.model.response.SaleCarRequestResponseEntity;
 import com.example.oldcarshowroom.service.SaleCarRequestService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,36 +20,36 @@ public class SaleCarRequestController {
 
     @GetMapping("/{id}")
     private ResponseEntity getSaleCarBySaleCarID(@PathVariable int id) {
-        SaleCarRequestEntity entity = saleCarRequestService.getSaleCarBySaleCarID(id);
+        SaleCarRequestResponseEntity entity = saleCarRequestService.getSaleCarBySaleCarID(id);
         return ResponseEntity.ok().body(entity);
     }
 
     @GetMapping("/userid/{id}")
     private ResponseEntity getSaleCarByUserID(@PathVariable int id){
-        List<SaleCarRequestEntity> entity = saleCarRequestService.getSaleCarByUserID(id);
+        List<SaleCarRequestResponseEntity> entity = saleCarRequestService.getSaleCarByUserID(id);
         return ResponseEntity.ok().body(entity);
     }
 
     @GetMapping("/showroomid/{id}")
     private ResponseEntity getSaleCarByShowRoomID(@PathVariable int id){
-        List<SaleCarRequestEntity> entity = saleCarRequestService.getSaleCarByShowRoomID(id);
+        List<SaleCarRequestResponseEntity> entity = saleCarRequestService.getSaleCarByShowRoomID(id);
         return ResponseEntity.ok().body(entity);
     }
 
     @GetMapping("/carid/{id}")
     private ResponseEntity getSaleCarByCarID(@PathVariable int id){
-        List<SaleCarRequestEntity> entity = saleCarRequestService.getSaleCarByCarID(id);
+        List<SaleCarRequestResponseEntity> entity = saleCarRequestService.getSaleCarByCarID(id);
         return ResponseEntity.ok().body(entity);
     }
 
     @PostMapping()
-    public ResponseEntity createNewSaleCarRequest(@RequestBody SaleCarRequestEntity entity) {
+    public ResponseEntity createNewSaleCarRequest(@RequestBody SaleCarRequestRequestEntity entity) {
         return ResponseEntity.ok().body(saleCarRequestService.createNewSaleCarRequest(entity));
     }
 
     @PutMapping
     private ResponseEntity updateExistedSaleCarRequest(@RequestParam int id,
-                                                       @RequestBody SaleCarRequestEntity entity) {
+                                                       @RequestBody SaleCarRequestRequestEntity entity) {
         return ResponseEntity.ok().body(saleCarRequestService.updateExistedSaleCarRequest(id, entity));
     }
 

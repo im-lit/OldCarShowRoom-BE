@@ -1,10 +1,11 @@
 package com.example.oldcarshowroom.service;
 
+import com.example.oldcarshowroom.model.request.BuyCarRequestRequestEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import com.example.oldcarshowroom.model.dto.BuyCarRequestDto;
-import com.example.oldcarshowroom.model.response.BuyCarRequestEntity;
+import com.example.oldcarshowroom.model.response.BuyCarRequestResponseEntity;
 import com.example.oldcarshowroom.repository.BuyCarRequestRepository;
 import com.example.oldcarshowroom.repository.CarRepository;
 import com.example.oldcarshowroom.repository.ShowroomRepository;
@@ -26,29 +27,29 @@ public class BuyCarRequestService {
     private final ShowroomRepository showroomRepository;
 
 
-    public BuyCarRequestEntity getBuyCarByBuyCarID(int id) {
-        return BuyCarRequestEntity.fromBuyCarRequestDto(buyCarRequestRepository.getById(id));
+    public BuyCarRequestResponseEntity getBuyCarByBuyCarID(int id) {
+        return BuyCarRequestResponseEntity.fromBuyCarRequestDto(buyCarRequestRepository.getById(id));
     }
 
-    public List<BuyCarRequestEntity> getBuyCarByShowroomID(int id) {
+    public List<BuyCarRequestResponseEntity> getBuyCarByShowroomID(int id) {
         return buyCarRequestRepository.getBuyCarByShowRoomID(id).stream()
-                .map(BuyCarRequestEntity::fromBuyCarRequestDto)
+                .map(BuyCarRequestResponseEntity::fromBuyCarRequestDto)
                 .collect(Collectors.toList());
     }
 
-    public List<BuyCarRequestEntity> getBuyCarByUserID(int id) {
+    public List<BuyCarRequestResponseEntity> getBuyCarByUserID(int id) {
         return buyCarRequestRepository.getBuyCarByUserID(id).stream()
-                .map(BuyCarRequestEntity::fromBuyCarRequestDto)
+                .map(BuyCarRequestResponseEntity::fromBuyCarRequestDto)
                 .collect(Collectors.toList());
     }
 
-    public List<BuyCarRequestEntity> getBuyCarByCarID(int id) {
+    public List<BuyCarRequestResponseEntity> getBuyCarByCarID(int id) {
         return buyCarRequestRepository.getBuyCarByCarID(id).stream()
-                .map(BuyCarRequestEntity::fromBuyCarRequestDto)
+                .map(BuyCarRequestResponseEntity::fromBuyCarRequestDto)
                 .collect(Collectors.toList());
     }
 
-    public BuyCarRequestEntity createNewBuyCarRequest(BuyCarRequestEntity entity) {
+    public BuyCarRequestResponseEntity createNewBuyCarRequest(BuyCarRequestRequestEntity entity) {
         BuyCarRequestDto dto = BuyCarRequestDto.builder()
                 .status(entity.isStatus())
                 .date(entity.getDate())
@@ -57,11 +58,11 @@ public class BuyCarRequestService {
                 .showroomDto(showroomRepository.findById(entity.getShowroomID()).orElseThrow())
                 .build();
 
-        return BuyCarRequestEntity.fromBuyCarRequestDto(dto);
+        return BuyCarRequestResponseEntity.fromBuyCarRequestDto(dto);
     }
 
 
-    public BuyCarRequestEntity updateExistedBuyCarRequest(int id, BuyCarRequestEntity entity) {
+    public BuyCarRequestResponseEntity updateExistedBuyCarRequest(int id, BuyCarRequestRequestEntity entity) {
         BuyCarRequestDto dto = buyCarRequestRepository.findById(id).orElseThrow();
 
         dto.setDate(entity.getDate());
@@ -70,15 +71,15 @@ public class BuyCarRequestService {
         dto.setUserDto(userRepository.findById(entity.getUserID()).orElseThrow());
         dto.setShowroomDto(showroomRepository.findById(entity.getShowroomID()).orElseThrow());
 
-        return BuyCarRequestEntity.fromBuyCarRequestDto(buyCarRequestRepository.save(dto));
+        return BuyCarRequestResponseEntity.fromBuyCarRequestDto(buyCarRequestRepository.save(dto));
     }
 
-    public BuyCarRequestEntity deleteExistedBuyCarRequest(int id) {
+    public BuyCarRequestResponseEntity deleteExistedBuyCarRequest(int id) {
         BuyCarRequestDto dto = buyCarRequestRepository.findById(id).orElseThrow();
         buyCarRequestRepository.deleteById(id);
 
         System.out.println("abc");
-        return BuyCarRequestEntity.fromBuyCarRequestDto(dto);
+        return BuyCarRequestResponseEntity.fromBuyCarRequestDto(dto);
     }
 
 

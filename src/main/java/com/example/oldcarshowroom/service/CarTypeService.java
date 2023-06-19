@@ -1,7 +1,8 @@
 package com.example.oldcarshowroom.service;
 
 import com.example.oldcarshowroom.model.dto.CarTypeDto;
-import com.example.oldcarshowroom.model.response.CarTypeEntity;
+import com.example.oldcarshowroom.model.request.CarTypeRequestEntity;
+import com.example.oldcarshowroom.model.response.CarTypeResponseEntity;
 import com.example.oldcarshowroom.repository.CarTypeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,37 +17,37 @@ public class CarTypeService {
 
 
 
-    public CarTypeEntity createNewCarType(CarTypeEntity entity) {
+    public CarTypeResponseEntity createNewCarType(CarTypeRequestEntity entity) {
         CarTypeDto dto = CarTypeDto.builder()
                 .carTypeName(entity.getCarTypeName())
                 .build();
 
-        return CarTypeEntity.fromCarTypeDto(carTypeRepository.save(dto));
+        return CarTypeResponseEntity.fromCarTypeDto(carTypeRepository.save(dto));
     }
 
-    public List<CarTypeEntity> getAllCarTypes() {
+    public List<CarTypeResponseEntity> getAllCarTypes() {
         return carTypeRepository.findAll().stream()
-                .map(CarTypeEntity::fromCarTypeDto)
+                .map(CarTypeResponseEntity::fromCarTypeDto)
                 .collect(Collectors.toList());
     }
 
-    public CarTypeEntity updateExistedCarType(int id, CarTypeEntity entity) {
+    public CarTypeResponseEntity updateExistedCarType(int id, CarTypeRequestEntity entity) {
         CarTypeDto dto = carTypeRepository.findById(id).orElseThrow();
 
 
         dto.setCarTypeName(entity.getCarTypeName());
 
-        return CarTypeEntity.fromCarTypeDto(carTypeRepository.save(dto));
+        return CarTypeResponseEntity.fromCarTypeDto(carTypeRepository.save(dto));
     }
 
-    public CarTypeEntity deleteExistedCarType(int id) {
+    public CarTypeResponseEntity deleteExistedCarType(int id) {
         CarTypeDto dto = carTypeRepository.findById(id).orElseThrow();
         carTypeRepository.deleteById(id);
-        return CarTypeEntity.fromCarTypeDto(dto);
+        return CarTypeResponseEntity.fromCarTypeDto(dto);
     }
 
 
-    public CarTypeEntity getCarTypeByCarTypeID(int id) {
-        return CarTypeEntity.fromCarTypeDto(carTypeRepository.getById(id));
+    public CarTypeResponseEntity getCarTypeByCarTypeID(int id) {
+        return CarTypeResponseEntity.fromCarTypeDto(carTypeRepository.getById(id));
     }
 }

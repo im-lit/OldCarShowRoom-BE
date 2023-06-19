@@ -1,7 +1,8 @@
 package com.example.oldcarshowroom.service;
 
 import com.example.oldcarshowroom.model.dto.SaleCarRequestDto;
-import com.example.oldcarshowroom.model.response.SaleCarRequestEntity;
+import com.example.oldcarshowroom.model.request.SaleCarRequestRequestEntity;
+import com.example.oldcarshowroom.model.response.SaleCarRequestResponseEntity;
 import com.example.oldcarshowroom.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,29 +24,29 @@ public class SaleCarRequestService {
 
 
 
-    public SaleCarRequestEntity getSaleCarBySaleCarID(int id) {
-        return SaleCarRequestEntity.fromSaleCarRequestDto(saleCarRequestRepository.getById(id));
+    public SaleCarRequestResponseEntity getSaleCarBySaleCarID(int id) {
+        return SaleCarRequestResponseEntity.fromSaleCarRequestDto(saleCarRequestRepository.getById(id));
     }
 
-    public List<SaleCarRequestEntity> getSaleCarByShowRoomID(int id) {
+    public List<SaleCarRequestResponseEntity> getSaleCarByShowRoomID(int id) {
         return saleCarRequestRepository.getSaleCarByShowRoomID(id).stream()
-                .map(SaleCarRequestEntity::fromSaleCarRequestDto)
+                .map(SaleCarRequestResponseEntity::fromSaleCarRequestDto)
                 .collect(Collectors.toList());
     }
 
-    public List<SaleCarRequestEntity> getSaleCarByUserID(int id) {
+    public List<SaleCarRequestResponseEntity> getSaleCarByUserID(int id) {
         return saleCarRequestRepository.getSaleCarByUserID(id).stream()
-                .map(SaleCarRequestEntity::fromSaleCarRequestDto)
+                .map(SaleCarRequestResponseEntity::fromSaleCarRequestDto)
                 .collect(Collectors.toList());
     }
 
-    public List<SaleCarRequestEntity> getSaleCarByCarID(int id) {
+    public List<SaleCarRequestResponseEntity> getSaleCarByCarID(int id) {
         return saleCarRequestRepository.getSaleCarByCarID(id).stream()
-                .map(SaleCarRequestEntity::fromSaleCarRequestDto)
+                .map(SaleCarRequestResponseEntity::fromSaleCarRequestDto)
                 .collect(Collectors.toList());
     }
 
-    public SaleCarRequestEntity createNewSaleCarRequest(SaleCarRequestEntity entity) {
+    public SaleCarRequestResponseEntity createNewSaleCarRequest(SaleCarRequestRequestEntity entity) {
         SaleCarRequestDto dto = SaleCarRequestDto.builder()
                 .status(entity.isStatus())
                 .date(entity.getDate())
@@ -54,11 +55,11 @@ public class SaleCarRequestService {
                 .showroomDto(showroomRepository.findById(entity.getShowroomID()).orElseThrow())
                 .build();
 
-        return SaleCarRequestEntity.fromSaleCarRequestDto(dto);
+        return SaleCarRequestResponseEntity.fromSaleCarRequestDto(dto);
     }
 
 
-    public SaleCarRequestEntity updateExistedSaleCarRequest(int id, SaleCarRequestEntity entity) {
+    public SaleCarRequestResponseEntity updateExistedSaleCarRequest(int id, SaleCarRequestRequestEntity entity) {
         SaleCarRequestDto dto = saleCarRequestRepository.findById(id).orElseThrow();
 
         dto.setDate(entity.getDate());
@@ -67,12 +68,12 @@ public class SaleCarRequestService {
         dto.setUserDto(userRepository.findById(entity.getUserID()).orElseThrow());
         dto.setShowroomDto(showroomRepository.findById(entity.getShowroomID()).orElseThrow());
 
-        return SaleCarRequestEntity.fromSaleCarRequestDto(saleCarRequestRepository.save(dto));
+        return SaleCarRequestResponseEntity.fromSaleCarRequestDto(saleCarRequestRepository.save(dto));
     }
 
-    public SaleCarRequestEntity deleteExistedSaleCarRequest(int id) {
+    public SaleCarRequestResponseEntity deleteExistedSaleCarRequest(int id) {
         SaleCarRequestDto dto = saleCarRequestRepository.findById(id).orElseThrow();
         saleCarRequestRepository.deleteById(id);
-        return SaleCarRequestEntity.fromSaleCarRequestDto(dto);
+        return SaleCarRequestResponseEntity.fromSaleCarRequestDto(dto);
     }
 }

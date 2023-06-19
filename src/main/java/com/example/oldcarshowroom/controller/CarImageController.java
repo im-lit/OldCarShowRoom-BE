@@ -1,9 +1,8 @@
 package com.example.oldcarshowroom.controller;
 
-import com.example.oldcarshowroom.model.response.CarImageEntity;
-import com.example.oldcarshowroom.model.response.RoleEntity;
+import com.example.oldcarshowroom.model.request.CarImageRequestEntity;
+import com.example.oldcarshowroom.model.response.CarImageResponseEntity;
 import com.example.oldcarshowroom.service.CarImageService;
-import com.example.oldcarshowroom.service.RoleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,25 +18,25 @@ public class CarImageController {
 
     @GetMapping("/{id}")
     private ResponseEntity getCarImageByCarImageID(@PathVariable int id) {
-        CarImageEntity listEntity = carImageService.getCarImageByCarImageID(id);
+        CarImageResponseEntity listEntity = carImageService.getCarImageByCarImageID(id);
         return ResponseEntity.ok().body(listEntity);
     }
 
 
     @GetMapping("/carID/{carID}")
     private ResponseEntity getCarImageByCarID(@PathVariable Integer carID) {
-        List<CarImageEntity> entity = carImageService.getCarImageByCarID(carID);
+        List<CarImageResponseEntity> entity = carImageService.getCarImageByCarID(carID);
         return ResponseEntity.ok().body(entity);
     }
 
     @PostMapping()
-    public ResponseEntity createNewCarImage(@RequestBody CarImageEntity entity) {
+    public ResponseEntity createNewCarImage(@RequestBody CarImageRequestEntity entity) {
 
         return ResponseEntity.ok().body(carImageService.createNewCarImage(entity));
     }
 
     @PutMapping
-    private ResponseEntity updateExistedCarImage(@RequestParam int id,@RequestBody CarImageEntity entity) {
+    private ResponseEntity updateExistedCarImage(@RequestParam int id,@RequestBody CarImageRequestEntity entity) {
         return ResponseEntity.ok().body(carImageService.updateExistedCarImage(id, entity));
     }
 

@@ -1,7 +1,8 @@
 package com.example.oldcarshowroom.service;
 
 import com.example.oldcarshowroom.model.dto.CarBrandDto;
-import com.example.oldcarshowroom.model.response.CarBrandEntity;
+import com.example.oldcarshowroom.model.request.CarBrandRequestEntity;
+import com.example.oldcarshowroom.model.response.CarBrandResponseEntity;
 import com.example.oldcarshowroom.repository.CarBrandRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,38 +18,38 @@ public class CarBrandService {
 
 
 
-    public CarBrandEntity createNewCarBrand(CarBrandEntity entity) {
+    public CarBrandResponseEntity createNewCarBrand(CarBrandRequestEntity entity) {
         CarBrandDto dto = CarBrandDto.builder()
                 .carBrandName(entity.getCarBrandName())
                 .logoUrl(entity.getLogoUrl())
                 .build();
 
-        return CarBrandEntity.fromCarBrandDto(carBrandRepository.save(dto));
+        return CarBrandResponseEntity.fromCarBrandDto(carBrandRepository.save(dto));
     }
 
-    public List<CarBrandEntity> getAllCarBrands() {
+    public List<CarBrandResponseEntity> getAllCarBrands() {
         return carBrandRepository.findAll().stream()
-                .map(CarBrandEntity::fromCarBrandDto)
+                .map(CarBrandResponseEntity::fromCarBrandDto)
                 .collect(Collectors.toList());
     }
 
-    public CarBrandEntity updateExistedCarBrand(int id, CarBrandEntity entity) {
+    public CarBrandResponseEntity updateExistedCarBrand(int id, CarBrandRequestEntity entity) {
         CarBrandDto dto = carBrandRepository.findById(id).orElseThrow();
 
         dto.setCarBrandName(entity.getCarBrandName());
         dto.setLogoUrl(entity.getLogoUrl());
 
-        return CarBrandEntity.fromCarBrandDto(carBrandRepository.save(dto));
+        return CarBrandResponseEntity.fromCarBrandDto(carBrandRepository.save(dto));
     }
 
-    public CarBrandEntity deleteExistedCarBrand(int id) {
+    public CarBrandResponseEntity deleteExistedCarBrand(int id) {
         CarBrandDto dto = carBrandRepository.findById(id).orElseThrow();
         carBrandRepository.deleteById(id);
-        return CarBrandEntity.fromCarBrandDto(dto);
+        return CarBrandResponseEntity.fromCarBrandDto(dto);
     }
 
 
-    public CarBrandEntity getCarBrandByCarBrandID(int id) {
-        return CarBrandEntity.fromCarBrandDto(carBrandRepository.getById(id));
+    public CarBrandResponseEntity getCarBrandByCarBrandID(int id) {
+        return CarBrandResponseEntity.fromCarBrandDto(carBrandRepository.getById(id));
     }
 }

@@ -1,6 +1,7 @@
 package com.example.oldcarshowroom.model.response;
 
-import com.example.oldcarshowroom.model.dto.SaleCarRequestDto;
+import com.example.oldcarshowroom.model.dto.BuyCarRequestDto;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,9 +11,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SaleCarRequestEntity {
+public class BuyCarRequestResponseEntity {
 
-    private int saleCarID;
+    private int buyCarID;
 
     private boolean status;
 
@@ -24,9 +25,9 @@ public class SaleCarRequestEntity {
 
     private int showroomID;
 
-    public static SaleCarRequestEntity fromSaleCarRequestDto(SaleCarRequestDto dto) {
-        return SaleCarRequestEntity.builder()
-                .saleCarID(dto.getSaleCarID())
+    public static BuyCarRequestResponseEntity fromBuyCarRequestDto(BuyCarRequestDto dto) {
+        return BuyCarRequestResponseEntity.builder()
+                .buyCarID(dto.getBuyCarID())
                 .status(dto.isStatus())
                 .date(dto.getDate())
                 .userID(dto.getUserDto().getUserID())

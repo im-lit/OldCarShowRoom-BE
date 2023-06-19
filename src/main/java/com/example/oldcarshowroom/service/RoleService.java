@@ -1,13 +1,13 @@
 package com.example.oldcarshowroom.service;
 
+import com.example.oldcarshowroom.model.request.RoleRequestEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import com.example.oldcarshowroom.model.dto.RoleDto;
-import com.example.oldcarshowroom.model.response.RoleEntity;
+import com.example.oldcarshowroom.model.response.RoleResponseEntity;
 import com.example.oldcarshowroom.repository.RoleRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,38 +18,38 @@ public class RoleService {
 
 
 
-    public RoleEntity createNewRole(RoleEntity entity) {
+    public RoleResponseEntity createNewRole(RoleRequestEntity entity) {
         RoleDto dto = RoleDto.builder()
 //                .roleID(entity.getRoleID())
                 .roleName(entity.getRoleName())
                 .build();
 
-        return RoleEntity.fromRoleDto(roleRepository.save(dto));
+        return RoleResponseEntity.fromRoleDto(roleRepository.save(dto));
     }
 
-    public List<RoleEntity> getAllRoles() {
+    public List<RoleResponseEntity> getAllRoles() {
         return roleRepository.findAll().stream()
-                .map(RoleEntity::fromRoleDto)
+                .map(RoleResponseEntity::fromRoleDto)
                 .collect(Collectors.toList());
     }
 
-    public RoleEntity updateExistedRole(int id, RoleEntity entity) {
+    public RoleResponseEntity updateExistedRole(int id, RoleRequestEntity entity) {
         RoleDto dto = roleRepository.findById(id).orElseThrow();
 
 //        dto.setRoleID(entity.getRoleID());
         dto.setRoleName(entity.getRoleName());
 
-        return RoleEntity.fromRoleDto(roleRepository.save(dto));
+        return RoleResponseEntity.fromRoleDto(roleRepository.save(dto));
     }
 
-    public RoleEntity deleteExistedRole(int id) {
+    public RoleResponseEntity deleteExistedRole(int id) {
         RoleDto dto = roleRepository.findById(id).orElseThrow();
         roleRepository.deleteById(id);
-        return RoleEntity.fromRoleDto(dto);
+        return RoleResponseEntity.fromRoleDto(dto);
     }
 
 
-    public RoleEntity getRoleByRoleID(int id) {
-        return RoleEntity.fromRoleDto(roleRepository.getById(id));
+    public RoleResponseEntity getRoleByRoleID(int id) {
+        return RoleResponseEntity.fromRoleDto(roleRepository.getById(id));
     }
 }

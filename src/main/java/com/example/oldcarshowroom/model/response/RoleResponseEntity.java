@@ -11,14 +11,14 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RoleEntity {
+public class RoleResponseEntity {
 
     private int roleID;
 
     private String roleName;
 
-    public static RoleEntity fromRoleDto(RoleDto dto) {
-        return RoleEntity.builder()
+    public static RoleResponseEntity fromRoleDto(RoleDto dto) {
+        return RoleResponseEntity.builder()
                 .roleID(dto.getRoleID())
                 .roleName(dto.getRoleName())
                 .build();

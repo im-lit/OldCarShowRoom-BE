@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CarEntity {
+public class CarResponseEntity {
         private int carID;
         
         private String carAvatar;
@@ -40,8 +40,8 @@ public class CarEntity {
 
         private int showroomID;
 
-        public static CarEntity fromCarDto(CarDto dto) {
-            return CarEntity.builder()
+        public static CarResponseEntity fromCarDto(CarDto dto) {
+            return CarResponseEntity.builder()
                     .carID(dto.getCarID())
                     .carAvatar(dto.getCarAvatar())
                     .carName(dto.getCarName())

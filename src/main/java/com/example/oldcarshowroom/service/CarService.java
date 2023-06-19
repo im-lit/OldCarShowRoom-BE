@@ -1,13 +1,12 @@
 package com.example.oldcarshowroom.service;
 
+import com.example.oldcarshowroom.model.request.CarRequestEntity;
 import com.example.oldcarshowroom.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import com.example.oldcarshowroom.model.dto.CarDto;
-import com.example.oldcarshowroom.model.dto.UserDto;
-import com.example.oldcarshowroom.model.response.CarEntity;
-import com.example.oldcarshowroom.model.response.UserEntity;
+import com.example.oldcarshowroom.model.response.CarResponseEntity;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,29 +27,29 @@ public class CarService {
 
 
 
-    public CarEntity getCarByCarID(int id) {
-        return CarEntity.fromCarDto(carRepository.getById(id));
+    public CarResponseEntity getCarByCarID(int id) {
+        return CarResponseEntity.fromCarDto(carRepository.getById(id));
     }
 
-    public List<CarEntity> getCarByShowroomID(int id) {
+    public List<CarResponseEntity> getCarByShowroomID(int id) {
         return carRepository.getCarByShowRoomID(id).stream()
-                .map(CarEntity::fromCarDto)
+                .map(CarResponseEntity::fromCarDto)
                 .collect(Collectors.toList());
     }
 
-    public List<CarEntity> getCarByUserID(int id) {
+    public List<CarResponseEntity> getCarByUserID(int id) {
         return carRepository.getCarByUserID(id).stream()
-                .map(CarEntity::fromCarDto)
+                .map(CarResponseEntity::fromCarDto)
                 .collect(Collectors.toList());
     }
 
-    public List<CarEntity> getAllCarCanSale() {
+    public List<CarResponseEntity> getAllCarCanSale() {
         return carRepository.getAllCarCanSale().stream()
-                .map(CarEntity::fromCarDto)
+                .map(CarResponseEntity::fromCarDto)
                 .collect(Collectors.toList());
     }
 
-    public CarEntity createNewCar(CarEntity entity) {
+    public CarResponseEntity createNewCar(CarRequestEntity entity) {
         CarDto dto = CarDto.builder()
                 .carName(entity.getCarName())
                 .carBrandDto(carBrandRepository.findById(entity.getCarBrandID()).orElseThrow())
@@ -66,11 +65,11 @@ public class CarService {
                 .showroomDto(showroomRepository.findById(entity.getShowroomID()).orElseThrow())
                 .build();
 
-        return CarEntity.fromCarDto(carRepository.save(dto));
+        return CarResponseEntity.fromCarDto(carRepository.save(dto));
     }
 
 
-    public CarEntity updateExistedCar(int id, CarEntity entity) {
+    public CarResponseEntity updateExistedCar(int id, CarRequestEntity entity) {
         CarDto dto = carRepository.findById(id).orElseThrow();
 
         dto.setCarName(entity.getCarName());
@@ -86,13 +85,13 @@ public class CarService {
         dto.setUserDto(userRepository.findById(entity.getUserID()).orElseThrow());
         dto.setShowroomDto(showroomRepository.findById(entity.getShowroomID()).orElseThrow());
 
-        return CarEntity.fromCarDto(carRepository.save(dto));
+        return CarResponseEntity.fromCarDto(carRepository.save(dto));
     }
 
-    public CarEntity deleteExistedCar(int id) {
+    public CarResponseEntity deleteExistedCar(int id) {
         CarDto dto = carRepository.findById(id).orElseThrow();
         carRepository.deleteById(id);
-        return CarEntity.fromCarDto(dto);
+        return CarResponseEntity.fromCarDto(dto);
     }
 
 

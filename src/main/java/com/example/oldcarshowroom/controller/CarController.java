@@ -1,13 +1,12 @@
 package com.example.oldcarshowroom.controller;
 
+import com.example.oldcarshowroom.model.request.CarRequestEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.oldcarshowroom.model.response.CarEntity;
-import com.example.oldcarshowroom.model.response.UserEntity;
+import com.example.oldcarshowroom.model.response.CarResponseEntity;
 import com.example.oldcarshowroom.service.CarService;
-import com.example.oldcarshowroom.service.UserService;
 
 import java.util.List;
 
@@ -22,7 +21,7 @@ public class CarController  {
 
     @GetMapping("/{id}")
     private ResponseEntity getCarByCarID(@PathVariable int id) {
-        CarEntity entity = carService.getCarByCarID(id);
+        CarResponseEntity entity = carService.getCarByCarID(id);
         return ResponseEntity.ok().body(entity);
     }
 
@@ -33,23 +32,23 @@ public class CarController  {
 
     @GetMapping("/userid/{id}")
     private ResponseEntity getUserByUserID(@PathVariable int id){
-        List<CarEntity> entity = carService.getCarByUserID(id);
+        List<CarResponseEntity> entity = carService.getCarByUserID(id);
         return ResponseEntity.ok().body(entity);
     }
 
     @GetMapping("/showroomid/{id}")
     private ResponseEntity getCarByShowroomID(@PathVariable int id){
-        List<CarEntity> entity = carService.getCarByShowroomID(id);
+        List<CarResponseEntity> entity = carService.getCarByShowroomID(id);
         return ResponseEntity.ok().body(entity);
     }
 
     @PostMapping()
-    public ResponseEntity createNewCar(@RequestBody CarEntity entity) {
+    public ResponseEntity createNewCar(@RequestBody CarRequestEntity entity) {
         return ResponseEntity.ok().body(carService.createNewCar(entity));
     }
 
     @PutMapping
-    private ResponseEntity updateExistedCar(@RequestParam int id, @RequestBody CarEntity entity) {
+    private ResponseEntity updateExistedCar(@RequestParam int id, @RequestBody CarRequestEntity entity) {
         return ResponseEntity.ok().body(carService.updateExistedCar(id, entity));
     }
 

@@ -1,16 +1,12 @@
 package com.example.oldcarshowroom.controller;
 
+import com.example.oldcarshowroom.model.request.UserRequestEntity;
 import lombok.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.oldcarshowroom.model.dto.UserDto;
-import com.example.oldcarshowroom.model.response.RoleEntity;
-import com.example.oldcarshowroom.model.response.UserEntity;
-import com.example.oldcarshowroom.service.RoleService;
+import com.example.oldcarshowroom.model.response.UserResponseEntity;
 import com.example.oldcarshowroom.service.UserService;
-
-import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -23,7 +19,7 @@ public class UserController {
 
     @GetMapping("/{id}")
     private ResponseEntity getUserByUserID(@PathVariable int id) {
-        UserEntity entity = userService.getUserByUserID(id);
+        UserResponseEntity entity = userService.getUserByUserID(id);
         return ResponseEntity.ok().body(entity);
     }
 
@@ -34,7 +30,7 @@ public class UserController {
 
     @PostMapping("/login")
     private ResponseEntity checkLogin(@RequestParam String username, @RequestParam String password) {
-        UserEntity entity = userService.checkLogin(username,password);
+        UserResponseEntity entity = userService.checkLogin(username,password);
         if(entity == null){
             return ResponseEntity.badRequest().body("Wrong username & password");
         }
@@ -42,14 +38,14 @@ public class UserController {
     }
 
     @PostMapping()
-    public ResponseEntity createNewUser(@RequestBody UserEntity entity) {
+    public ResponseEntity createNewUser(@RequestBody UserRequestEntity entity) {
         return ResponseEntity.ok().body(userService.createNewUser(entity));
     }
 
     @PutMapping
     private ResponseEntity updateExistedUser(@RequestParam int id ,
-                                             @RequestBody UserEntity entity) {
-        //a
+                                             @RequestBody UserRequestEntity entity) {
+
         return ResponseEntity.ok().body(userService.updateExistedUser(id, entity));
     }
 

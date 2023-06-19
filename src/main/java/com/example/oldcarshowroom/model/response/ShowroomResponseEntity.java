@@ -1,7 +1,6 @@
 package com.example.oldcarshowroom.model.response;
 
 import com.example.oldcarshowroom.model.dto.ShowroomDto;
-import com.example.oldcarshowroom.model.dto.UserDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ShowroomEntity {
+public class ShowroomResponseEntity {
     private int showroomID;
 
     private String showroomName;
@@ -25,8 +24,8 @@ public class ShowroomEntity {
 
     private int userID;
 
-    public static ShowroomEntity fromShowroomDto(ShowroomDto dto) {
-        return ShowroomEntity.builder()
+    public static ShowroomResponseEntity fromShowroomDto(ShowroomDto dto) {
+        return ShowroomResponseEntity.builder()
                 .showroomID(dto.getShowroomID())
                 .showroomAvatar(dto.getShowroomAvatar())
                 .showroomName(dto.getShowroomName())

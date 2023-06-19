@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.apache.catalina.User;
 
 import com.example.oldcarshowroom.model.dto.UserDto;
 
@@ -12,7 +11,7 @@ import com.example.oldcarshowroom.model.dto.UserDto;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserEntity {
+public class UserResponseEntity {
 
     private int userID;
 
@@ -32,8 +31,8 @@ public class UserEntity {
 
     private int roleID;
 
-    public static UserEntity fromUserDto(UserDto dto) {
-        return UserEntity.builder()
+    public static UserResponseEntity fromUserDto(UserDto dto) {
+        return UserResponseEntity.builder()
                 .userID(dto.getUserID())
                 .userName(dto.getUserName())
                 .password(dto.getPassword())

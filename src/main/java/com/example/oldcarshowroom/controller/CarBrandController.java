@@ -1,6 +1,7 @@
 package com.example.oldcarshowroom.controller;
 
-import com.example.oldcarshowroom.model.response.CarBrandEntity;
+import com.example.oldcarshowroom.model.request.CarBrandRequestEntity;
+import com.example.oldcarshowroom.model.response.CarBrandResponseEntity;
 import com.example.oldcarshowroom.service.CarBrandService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,23 +18,23 @@ public class CarBrandController {
     private final CarBrandService carBrandService = null;
     @GetMapping
     private ResponseEntity getAllCarBrands() {
-        List<CarBrandEntity> listEntity = carBrandService.getAllCarBrands();
+        List<CarBrandResponseEntity> listEntity = carBrandService.getAllCarBrands();
         return ResponseEntity.ok().body(listEntity);
     }
 
     @GetMapping("/{id}")
     private ResponseEntity getCarBrandByCarBrandID(@PathVariable int id) {
-        CarBrandEntity entity = carBrandService.getCarBrandByCarBrandID(id);
+        CarBrandResponseEntity entity = carBrandService.getCarBrandByCarBrandID(id);
         return ResponseEntity.ok().body(entity);
     }
 
     @PostMapping()
-    public ResponseEntity createNewCarBrand(@RequestBody CarBrandEntity entity) {
+    public ResponseEntity createNewCarBrand(@RequestBody CarBrandRequestEntity entity) {
         return ResponseEntity.ok().body(carBrandService.createNewCarBrand(entity));
     }
 
     @PutMapping
-    private ResponseEntity updateExistedCarBrand(@RequestParam int id, @RequestBody CarBrandEntity entity) {
+    private ResponseEntity updateExistedCarBrand(@RequestParam int id, @RequestBody CarBrandRequestEntity entity) {
         return ResponseEntity.ok().body(carBrandService.updateExistedCarBrand(id, entity));
     }
 

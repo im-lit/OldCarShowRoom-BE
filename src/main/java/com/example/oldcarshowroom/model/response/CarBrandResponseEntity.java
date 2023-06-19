@@ -10,15 +10,15 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CarBrandEntity {
+public class CarBrandResponseEntity {
     private int carBrandID;
 
     private String carBrandName;
 
     private String logoUrl;
 
-    public static CarBrandEntity fromCarBrandDto(CarBrandDto dto) {
-        return CarBrandEntity.builder()
+    public static CarBrandResponseEntity fromCarBrandDto(CarBrandDto dto) {
+        return CarBrandResponseEntity.builder()
                 .carBrandID(dto.getCarBrandID())
                 .carBrandName(dto.getCarBrandName())
                 .logoUrl(dto.getLogoUrl())

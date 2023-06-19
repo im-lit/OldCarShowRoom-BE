@@ -1,15 +1,12 @@
 package com.example.oldcarshowroom.controller;
 
+import com.example.oldcarshowroom.model.request.ShowroomRequestEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.oldcarshowroom.model.response.RoleEntity;
-import com.example.oldcarshowroom.model.response.ShowroomEntity;
-import com.example.oldcarshowroom.service.RoleService;
+import com.example.oldcarshowroom.model.response.ShowroomResponseEntity;
 import com.example.oldcarshowroom.service.ShowroomService;
-
-import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -28,17 +25,17 @@ public class ShowroomController {
 
     @GetMapping("/{id}")
     private ResponseEntity getShowroomByShowroomID(@PathVariable int id) {
-        ShowroomEntity entity = showroomService.getShowroomByShowroomID(id);
+        ShowroomResponseEntity entity = showroomService.getShowroomByShowroomID(id);
         return ResponseEntity.ok().body(entity);
     }
 
     @PostMapping()
-    public ResponseEntity createNewShowroom(@RequestBody ShowroomEntity entity) {
+    public ResponseEntity createNewShowroom(@RequestBody ShowroomRequestEntity entity) {
         return ResponseEntity.ok().body(showroomService.createNewShowroom(entity));
     }
 
     @PutMapping
-    private ResponseEntity updateExistedShowroom(@RequestParam int id, @RequestBody ShowroomEntity entity) {
+    private ResponseEntity updateExistedShowroom(@RequestParam int id, @RequestBody ShowroomRequestEntity entity) {
         return ResponseEntity.ok().body(showroomService.updateExistedShowroom(id, entity));
     }
 

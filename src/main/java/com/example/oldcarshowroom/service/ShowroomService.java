@@ -1,19 +1,14 @@
 package com.example.oldcarshowroom.service;
 
+import com.example.oldcarshowroom.model.request.ShowroomRequestEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import com.example.oldcarshowroom.model.dto.RoleDto;
 import com.example.oldcarshowroom.model.dto.ShowroomDto;
-import com.example.oldcarshowroom.model.response.CarEntity;
-import com.example.oldcarshowroom.model.response.RoleEntity;
-import com.example.oldcarshowroom.model.response.ShowroomEntity;
-import com.example.oldcarshowroom.model.response.UserEntity;
-import com.example.oldcarshowroom.repository.RoleRepository;
+import com.example.oldcarshowroom.model.response.ShowroomResponseEntity;
 import com.example.oldcarshowroom.repository.ShowroomRepository;
 import com.example.oldcarshowroom.repository.UserRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,14 +23,14 @@ public class ShowroomService {
         return showroomRepository.existsById(id);
     }
     
-    public List<ShowroomEntity> getAllShowroom() {
+    public List<ShowroomResponseEntity> getAllShowroom() {
         return showroomRepository.findAll().stream()
-                .map(ShowroomEntity::fromShowroomDto)
+                .map(ShowroomResponseEntity::fromShowroomDto)
                 .collect(Collectors.toList());
     } 
 
 
-    public ShowroomEntity createNewShowroom(ShowroomEntity entity) {
+    public ShowroomResponseEntity createNewShowroom(ShowroomRequestEntity entity) {
         ShowroomDto dto = ShowroomDto.builder()
                 .showroomName(entity.getShowroomName())
                 .showroomAddress(entity.getShowroomAddress())
@@ -43,15 +38,15 @@ public class ShowroomService {
                 .userDto(userRepository.findById(entity.getUserID()).orElseThrow())
                 .build();
 
-        return ShowroomEntity.fromShowroomDto(showroomRepository.save(dto));
+        return ShowroomResponseEntity.fromShowroomDto(showroomRepository.save(dto));
     }
 
 
-    public ShowroomEntity getShowroomByShowroomID(int id) {
-        return ShowroomEntity.fromShowroomDto(showroomRepository.getById(id));
+    public ShowroomResponseEntity getShowroomByShowroomID(int id) {
+        return ShowroomResponseEntity.fromShowroomDto(showroomRepository.getById(id));
     }
 
-    public ShowroomEntity updateExistedShowroom(int id, ShowroomEntity entity) {
+    public ShowroomResponseEntity updateExistedShowroom(int id, ShowroomRequestEntity entity) {
         ShowroomDto dto = showroomRepository.findById(id).orElseThrow();
 
         dto.setShowroomName(entity.getShowroomName());
@@ -59,13 +54,13 @@ public class ShowroomService {
         dto.setShowroomPhone(entity.getShowroomPhone());
         dto.setUserDto(userRepository.findById(entity.getUserID()).orElseThrow());
 
-        return ShowroomEntity.fromShowroomDto(showroomRepository.save(dto));
+        return ShowroomResponseEntity.fromShowroomDto(showroomRepository.save(dto));
     }
 
-    public ShowroomEntity deleteExistedShowroom(int id) {
+    public ShowroomResponseEntity deleteExistedShowroom(int id) {
         ShowroomDto dto = showroomRepository.findById(id).orElseThrow();
         showroomRepository.deleteById(id);
-        return ShowroomEntity.fromShowroomDto(dto);
+        return ShowroomResponseEntity.fromShowroomDto(dto);
     }
 
 
