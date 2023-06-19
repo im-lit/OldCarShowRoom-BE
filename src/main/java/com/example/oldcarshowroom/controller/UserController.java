@@ -29,12 +29,9 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    private ResponseEntity checkLogin(@RequestParam String username, @RequestParam String password) {
-        UserResponseEntity entity = userService.checkLogin(username,password);
-        if(entity == null){
-            return ResponseEntity.badRequest().body("Wrong username & password");
-        }
-        return ResponseEntity.ok().body(entity);
+    private ResponseEntity<?> checkLogin(@RequestParam String username, @RequestParam String password) {
+        return ResponseEntity.ok().body(userService.checkLogin(username,password));
+
     }
 
     @PostMapping()

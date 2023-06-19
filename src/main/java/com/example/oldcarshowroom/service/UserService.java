@@ -1,7 +1,9 @@
 package com.example.oldcarshowroom.service;
 
+import com.example.oldcarshowroom.exception.LoginFailException2;
 import com.example.oldcarshowroom.model.request.UserRequestEntity;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
 import com.example.oldcarshowroom.model.dto.UserDto;
@@ -64,8 +66,11 @@ public class UserService {
     }
 
     public UserResponseEntity checkLogin(String userName, String password) {
-        //123213
-        return UserResponseEntity.fromUserDto(userRepository.checkLoginUserByUserIdAndPassword(userName, password));
+        UserDto dto = userRepository.checkLoginUserByUserIdAndPassword(userName, password);
+        if (dto == null) {
+            throw new LoginFailException2();
+        }
+        return UserResponseEntity.fromUserDto(dto);
 
     }
 
