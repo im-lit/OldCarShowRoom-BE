@@ -22,7 +22,7 @@ public class CarBrandService {
                 .carBrandName(entity.getCarBrandName())
                 .logoUrl(entity.getLogoUrl())
                 .build();
-
+        //a
         return CarBrandEntity.fromCarBrandDto(carBrandRepository.save(dto));
     }
 
