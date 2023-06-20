@@ -41,6 +41,12 @@ public class CarController  {
         List<CarResponseEntity> entity = carService.searchCarByCarBrandName(searchName);
         return ResponseEntity.ok().body(entity);
     }
+    
+    @GetMapping("/brandid/{brandId}")
+    private ResponseEntity getAllCarCanSaleByBrandId(@PathVariable int brandId){
+        List<CarResponseEntity> entity = carService.getAllCarCanSaleByBrandId(brandId);
+        return ResponseEntity.ok().body(entity);
+    }
 
     @GetMapping("/userid/{id}")
     private ResponseEntity getUserByUserID(@PathVariable int id){

@@ -26,5 +26,8 @@ public interface CarRepository extends JpaRepository<CarDto, Integer> {
 
     @Query("select dto from CarDto dto where dto.carBrandDto.carBrandName like %?1% ")
     List<CarDto> searchCarByCarBrandName(String carBrandName);
+    
+    @Query("select dto from CarDto dto where dto.carBrandDto.carBrandID = ?1 ")
+    List<CarDto> getAllCarCanSaleByBrandId(int brandId);
 
 }

@@ -42,6 +42,13 @@ public class CarService {
                 .map(CarResponseEntity::fromCarDto)
                 .collect(Collectors.toList());
     }
+    
+    public List<CarResponseEntity> getAllCarCanSaleByBrandId(int id){
+        return carRepository.getAllCarCanSaleByBrandId(id).stream()
+                .map(CarResponseEntity::fromCarDto)
+                .collect(Collectors.toList());
+    }
+    
 
     public List<CarResponseEntity> getCarByShowroomID(int id) {
         return carRepository.getCarByShowRoomID(id).stream()
