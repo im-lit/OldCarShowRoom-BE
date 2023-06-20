@@ -58,7 +58,7 @@ public class BuyCarRequestService {
                 .showroomDto(showroomRepository.findById(entity.getShowroomID()).orElseThrow())
                 .build();
 
-        return BuyCarRequestResponseEntity.fromBuyCarRequestDto(dto);
+        return BuyCarRequestResponseEntity.fromBuyCarRequestDto(buyCarRequestRepository.save(dto));
     }
 
 

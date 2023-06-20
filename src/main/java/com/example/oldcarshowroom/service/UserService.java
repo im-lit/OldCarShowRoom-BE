@@ -66,12 +66,10 @@ public class UserService {
     }
 
     public UserResponseEntity checkLogin(String userName, String password) {
-        UserDto dto = userRepository.checkLoginUserByUserIdAndPassword(userName, password);
-        if (dto == null) {
-            throw new LoginFailException2();
-        }
+        UserDto dto = userRepository.checkLoginUserByUserIdAndPassword(userName, password).orElseThrow(()-> {
+            throw new LoginFailException2("Wrong Username or password!!!");
+        });
         return UserResponseEntity.fromUserDto(dto);
-
     }
 
     public List<UserResponseEntity> getAllUser(){

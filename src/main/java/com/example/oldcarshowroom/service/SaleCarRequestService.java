@@ -55,7 +55,7 @@ public class SaleCarRequestService {
                 .showroomDto(showroomRepository.findById(entity.getShowroomID()).orElseThrow())
                 .build();
 
-        return SaleCarRequestResponseEntity.fromSaleCarRequestDto(dto);
+        return SaleCarRequestResponseEntity.fromSaleCarRequestDto(saleCarRequestRepository.save(dto));
     }
 
 

@@ -6,10 +6,12 @@ import org.springframework.stereotype.Repository;
 
 import com.example.oldcarshowroom.model.dto.UserDto;
 
+import java.util.Optional;
+
 @Repository
 public interface UserRepository extends JpaRepository<UserDto, Integer> {
 
     @Query("select user from UserDto user where user.userName = ?1 and user.password = ?2")
-    UserDto checkLoginUserByUserIdAndPassword(String userName, String password);
+    Optional<UserDto> checkLoginUserByUserIdAndPassword(String userName, String password);
 
 }

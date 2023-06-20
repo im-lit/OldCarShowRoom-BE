@@ -2,6 +2,8 @@ package com.example.oldcarshowroom.exception.handles;
 
 
 import com.example.oldcarshowroom.exception.LoginFailException2;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -10,9 +12,10 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import com.example.oldcarshowroom.exception.LoginFailException;
 
 import javax.persistence.EntityNotFoundException;
-
+import static com.example.oldcarshowroom.config.CommonUtils.switchException;
 
 @ControllerAdvice
+@Slf4j
 public class CustomExceptionHandler extends ResponseEntityExceptionHandler{
 	@ExceptionHandler(value = {
 			LoginFailException.class
@@ -23,19 +26,16 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler{
 				.body(new Response("Error", exception.getMessage()));
 	}
 
-	@ExceptionHandler(LoginFailException2.class)
-	public ResponseEntity<String> handleUnwantedException1(Exception e) {
-		return ResponseEntity.badRequest().body("Wrong Username or password!!!");
-	}
-
-//	@ExceptionHandler(ClassCastException.class)
-//	public ResponseEntity<String> handleUnwantedException3(Exception e) {
-//		return ResponseEntity.badRequest().body("Wrong Username or password!!!");
+//	@ExceptionHandler(LoginFailException2.class)
+//	public ResponseEntity<String> handleUnwantedException1(Exception e) {
+//		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
 //	}
 
-	@ExceptionHandler(EntityNotFoundException.class)
-	public ResponseEntity<String> handleUnwantedException2(Exception e) {
-		return ResponseEntity.badRequest().body("Not found!!!");
+	@ExceptionHandler(Exception.class)
+	public ResponseEntity<?> handleUnwantedException(Exception e) {
+		log.warn(e.toString());
+		return switchException(e);
 	}
-	
+
+
 }

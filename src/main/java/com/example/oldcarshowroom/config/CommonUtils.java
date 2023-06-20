@@ -1,7 +1,9 @@
 package com.example.oldcarshowroom.config;
 
+import com.example.oldcarshowroom.exception.LoginFailException2;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.Map;
@@ -25,18 +27,19 @@ public class CommonUtils {
 
     public static ResponseEntity<?> switchException(Exception e) {
 
-        var mappings = (Map<Class<? extends Exception>, Supplier<? extends Object>>)Map.of(
-                NullPointerException.class, (Supplier<?>) ResponseEntity::notFound,
-                IllegalArgumentException.class, (Supplier<?>) ResponseEntity::badRequest,
-                NoSuchElementException.class, (Supplier<?>) ResponseEntity::notFound,
-                JsonProcessingException.class, (Supplier<?>) ResponseEntity::badRequest,
-                ClassCastException.class, (Supplier<?>) ResponseEntity::notFound
+        var mappings = (Map<Class<? extends Exception>, HttpStatus>) Map.of(
+                JsonProcessingException.class, HttpStatus.BAD_REQUEST,
+                IllegalArgumentException.class, HttpStatus.BAD_REQUEST,
+                NullPointerException.class, HttpStatus.NOT_FOUND,
+                NoSuchElementException.class, HttpStatus.NOT_FOUND,
+                ClassCastException.class, HttpStatus.NOT_FOUND,
+                LoginFailException2.class, HttpStatus.UNAUTHORIZED
         );
+        var t = mappings.getOrDefault(e.getClass(), HttpStatus.INTERNAL_SERVER_ERROR);
 
-        return (ResponseEntity<?>) mappings.getOrDefault(
-                e.getClass(),
-                () -> ResponseEntity.internalServerError().body(e)
-        ).get();
+        return ResponseEntity.status(t).body(e.getMessage());
+
+
     }
 
 }
