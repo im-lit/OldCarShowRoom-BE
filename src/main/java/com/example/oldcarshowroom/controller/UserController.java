@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import com.example.oldcarshowroom.model.response.UserResponseEntity;
 import com.example.oldcarshowroom.service.UserService;
 
+import static com.example.oldcarshowroom.config.CommonUtils.controllerWrapper;
+
 @RestController
 @CrossOrigin
 @RequiredArgsConstructor
@@ -24,13 +26,14 @@ public class UserController {
     }
 
     @GetMapping()
-    private ResponseEntity getAllUser(){
+    private ResponseEntity getAllUser() {
         return ResponseEntity.ok().body(userService.getAllUser());
     }
 
     @PostMapping("/login")
     private ResponseEntity<?> checkLogin(@RequestParam String username, @RequestParam String password) {
         return ResponseEntity.ok().body(userService.checkLogin(username,password));
+//        return controllerWrapper(() -> userService.checkLogin(username, password));
 
     }
 
@@ -40,7 +43,7 @@ public class UserController {
     }
 
     @PutMapping
-    private ResponseEntity updateExistedUser(@RequestParam int id ,
+    private ResponseEntity updateExistedUser(@RequestParam int id,
                                              @RequestBody UserRequestEntity entity) {
 
         return ResponseEntity.ok().body(userService.updateExistedUser(id, entity));

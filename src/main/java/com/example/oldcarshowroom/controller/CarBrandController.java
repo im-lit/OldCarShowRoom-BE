@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping("/carbrands")
 public class CarBrandController {
 
-    private final CarBrandService carBrandService = null;
+    private final CarBrandService carBrandService;
     @GetMapping
     private ResponseEntity getAllCarBrands() {
         List<CarBrandResponseEntity> listEntity = carBrandService.getAllCarBrands();

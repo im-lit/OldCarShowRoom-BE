@@ -28,6 +28,11 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler{
 		return ResponseEntity.badRequest().body("Wrong Username or password!!!");
 	}
 
+//	@ExceptionHandler(ClassCastException.class)
+//	public ResponseEntity<String> handleUnwantedException3(Exception e) {
+//		return ResponseEntity.badRequest().body("Wrong Username or password!!!");
+//	}
+
 	@ExceptionHandler(EntityNotFoundException.class)
 	public ResponseEntity<String> handleUnwantedException2(Exception e) {
 		return ResponseEntity.badRequest().body("Not found!!!");

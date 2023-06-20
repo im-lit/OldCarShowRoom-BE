@@ -17,13 +17,11 @@ public class CarBrandService {
     private final CarBrandRepository carBrandRepository;
 
 
-
     public CarBrandResponseEntity createNewCarBrand(CarBrandRequestEntity entity) {
         CarBrandDto dto = CarBrandDto.builder()
                 .carBrandName(entity.getCarBrandName())
                 .logoUrl(entity.getLogoUrl())
                 .build();
-
         return CarBrandResponseEntity.fromCarBrandDto(carBrandRepository.save(dto));
     }
 

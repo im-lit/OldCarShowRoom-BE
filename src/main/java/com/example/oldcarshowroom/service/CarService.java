@@ -31,6 +31,18 @@ public class CarService {
         return CarResponseEntity.fromCarDto(carRepository.getById(id));
     }
 
+    public List<CarResponseEntity> searchCarByCarName(String name){
+        return carRepository.searchCarByCarName(name).stream()
+                .map(CarResponseEntity::fromCarDto)
+                .collect(Collectors.toList());
+    }
+
+    public List<CarResponseEntity> searchCarByCarBrandName(String name){
+        return carRepository.searchCarByCarBrandName(name).stream()
+                .map(CarResponseEntity::fromCarDto)
+                .collect(Collectors.toList());
+    }
+
     public List<CarResponseEntity> getCarByShowroomID(int id) {
         return carRepository.getCarByShowRoomID(id).stream()
                 .map(CarResponseEntity::fromCarDto)

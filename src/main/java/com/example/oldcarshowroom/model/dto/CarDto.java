@@ -68,6 +68,6 @@ public class CarDto {
     private CarTypeDto carTypeDto;
 
     public enum CarStatus{
-       CAN_NOT_SALE, CAN_SALE, ON_SALE
+       CAN_NOT_SALE, CAN_SALE, ON_SALE, SOLD_OUT
     }
 }
