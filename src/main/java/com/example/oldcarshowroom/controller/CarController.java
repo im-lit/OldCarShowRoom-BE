@@ -21,7 +21,7 @@ public class CarController  {
 
 
     @GetMapping("/{id}")
-    private ResponseEntity getCarByCarID(@PathVariable String id) {
+    private ResponseEntity getCarByCarID(@PathVariable int id) {
         CarEntity entity = carService.getCarByCarID(id);
         return ResponseEntity.ok().body(entity);
     }
@@ -32,32 +32,29 @@ public class CarController  {
     }
 
     @GetMapping("/userid/{id}")
-    private ResponseEntity getUserByUserID(@PathVariable String id){
+    private ResponseEntity getUserByUserID(@PathVariable int id){
         List<CarEntity> entity = carService.getCarByUserID(id);
         return ResponseEntity.ok().body(entity);
     }
 
     @GetMapping("/showroomid/{id}")
-    private ResponseEntity getCarByShowroomID(@PathVariable String id){
+    private ResponseEntity getCarByShowroomID(@PathVariable int id){
         List<CarEntity> entity = carService.getCarByShowroomID(id);
         return ResponseEntity.ok().body(entity);
     }
 
     @PostMapping()
     public ResponseEntity createNewCar(@RequestBody CarEntity entity) {
-        if(carService.isExisted(entity.getCarID())){
-            return ResponseEntity.badRequest().body("Car Id is duplicated");
-        }
         return ResponseEntity.ok().body(carService.createNewCar(entity));
     }
 
     @PutMapping
-    private ResponseEntity updateExistedCar(@RequestParam String id, @RequestBody CarEntity entity) {
+    private ResponseEntity updateExistedCar(@RequestParam int id, @RequestBody CarEntity entity) {
         return ResponseEntity.ok().body(carService.updateExistedCar(id, entity));
     }
 
     @DeleteMapping()
-    private ResponseEntity deleteExistedCar(@RequestParam String id) {
+    private ResponseEntity deleteExistedCar(@RequestParam int id) {
         return ResponseEntity.ok().body(carService.deleteExistedCar(id));
     }
 }

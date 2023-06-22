@@ -22,7 +22,7 @@ public class UserController {
 
 
     @GetMapping("/{id}")
-    private ResponseEntity getUserByUserID(@PathVariable String id) {
+    private ResponseEntity getUserByUserID(@PathVariable int id) {
         UserEntity entity = userService.getUserByUserID(id);
         return ResponseEntity.ok().body(entity);
     }
@@ -43,20 +43,18 @@ public class UserController {
 
     @PostMapping()
     public ResponseEntity createNewUser(@RequestBody UserEntity entity) {
-        if(userService.isExisted(entity.getUserID())){
-            return ResponseEntity.badRequest().body("User Id is duplicated");
-        }
         return ResponseEntity.ok().body(userService.createNewUser(entity));
     }
 
     @PutMapping
-    private ResponseEntity updateExistedUser(@RequestParam String id ,
+    private ResponseEntity updateExistedUser(@RequestParam int id ,
                                              @RequestBody UserEntity entity) {
+        ///abc
         return ResponseEntity.ok().body(userService.updateExistedUser(id, entity));
     }
 
     @DeleteMapping()
-    private ResponseEntity deleteExistedUser(@RequestParam String id) {
+    private ResponseEntity deleteExistedUser(@RequestParam int id) {
         return ResponseEntity.ok().body(userService.deleteExistedUser(id));
     }
 }

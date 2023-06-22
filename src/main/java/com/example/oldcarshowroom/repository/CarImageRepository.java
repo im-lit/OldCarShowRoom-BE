@@ -8,8 +8,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CarImageRepository extends JpaRepository<CarImageDto, String > {
+public interface CarImageRepository extends JpaRepository<CarImageDto, Integer > {
 
     @Query("select dto from CarImageDto dto where dto.carDto.carID = ?1")
-    List<CarImageDto> getCarImageByCarID(String id);
+    List<CarImageDto> getCarImageByCarID(int id);
 }

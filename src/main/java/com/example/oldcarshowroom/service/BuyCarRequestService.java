@@ -25,27 +25,24 @@ public class BuyCarRequestService {
 
     private final ShowroomRepository showroomRepository;
 
-    public boolean isExisted(String id) {
-        return buyCarRequestRepository.existsById(id);
-    }
 
-    public BuyCarRequestEntity getBuyCarByBuyCarID(String id) {
+    public BuyCarRequestEntity getBuyCarByBuyCarID(int id) {
         return BuyCarRequestEntity.fromBuyCarRequestDto(buyCarRequestRepository.getById(id));
     }
 
-    public List<BuyCarRequestEntity> getBuyCarByShowroomID(String id) {
+    public List<BuyCarRequestEntity> getBuyCarByShowroomID(int id) {
         return buyCarRequestRepository.getBuyCarByShowRoomID(id).stream()
                 .map(BuyCarRequestEntity::fromBuyCarRequestDto)
                 .collect(Collectors.toList());
     }
 
-    public List<BuyCarRequestEntity> getBuyCarByUserID(String id) {
+    public List<BuyCarRequestEntity> getBuyCarByUserID(int id) {
         return buyCarRequestRepository.getBuyCarByUserID(id).stream()
                 .map(BuyCarRequestEntity::fromBuyCarRequestDto)
                 .collect(Collectors.toList());
     }
 
-    public List<BuyCarRequestEntity> getBuyCarByCarID(String id) {
+    public List<BuyCarRequestEntity> getBuyCarByCarID(int id) {
         return buyCarRequestRepository.getBuyCarByCarID(id).stream()
                 .map(BuyCarRequestEntity::fromBuyCarRequestDto)
                 .collect(Collectors.toList());
@@ -64,7 +61,7 @@ public class BuyCarRequestService {
     }
 
 
-    public BuyCarRequestEntity updateExistedBuyCarRequest(String id, BuyCarRequestEntity entity) {
+    public BuyCarRequestEntity updateExistedBuyCarRequest(int id, BuyCarRequestEntity entity) {
         BuyCarRequestDto dto = buyCarRequestRepository.findById(id).orElseThrow();
 
         dto.setDate(entity.getDate());
@@ -76,7 +73,7 @@ public class BuyCarRequestService {
         return BuyCarRequestEntity.fromBuyCarRequestDto(buyCarRequestRepository.save(dto));
     }
 
-    public BuyCarRequestEntity deleteExistedBuyCarRequest(String id) {
+    public BuyCarRequestEntity deleteExistedBuyCarRequest(int id) {
         BuyCarRequestDto dto = buyCarRequestRepository.findById(id).orElseThrow();
         buyCarRequestRepository.deleteById(id);
 

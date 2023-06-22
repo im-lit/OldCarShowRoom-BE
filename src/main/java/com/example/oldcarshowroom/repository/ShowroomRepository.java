@@ -7,6 +7,6 @@ import com.example.oldcarshowroom.model.dto.ShowroomDto;
 
 @Repository
 
-public interface ShowroomRepository extends JpaRepository<ShowroomDto,String> {
+public interface ShowroomRepository extends JpaRepository<ShowroomDto,Integer> {
     
 }

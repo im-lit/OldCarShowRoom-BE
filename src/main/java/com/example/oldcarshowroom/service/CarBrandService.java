@@ -15,16 +15,14 @@ public class CarBrandService {
 
     private final CarBrandRepository carBrandRepository;
 
-    public boolean isExisted(String id) {
-        return carBrandRepository.existsById(id);
-    }
+
 
     public CarBrandEntity createNewCarBrand(CarBrandEntity entity) {
         CarBrandDto dto = CarBrandDto.builder()
                 .carBrandName(entity.getCarBrandName())
                 .logoUrl(entity.getLogoUrl())
                 .build();
-
+        //a
         return CarBrandEntity.fromCarBrandDto(carBrandRepository.save(dto));
     }
 
@@ -34,7 +32,7 @@ public class CarBrandService {
                 .collect(Collectors.toList());
     }
 
-    public CarBrandEntity updateExistedCarBrand(String id, CarBrandEntity entity) {
+    public CarBrandEntity updateExistedCarBrand(int id, CarBrandEntity entity) {
         CarBrandDto dto = carBrandRepository.findById(id).orElseThrow();
 
         dto.setCarBrandName(entity.getCarBrandName());
@@ -43,14 +41,14 @@ public class CarBrandService {
         return CarBrandEntity.fromCarBrandDto(carBrandRepository.save(dto));
     }
 
-    public CarBrandEntity deleteExistedCarBrand(String id) {
+    public CarBrandEntity deleteExistedCarBrand(int id) {
         CarBrandDto dto = carBrandRepository.findById(id).orElseThrow();
         carBrandRepository.deleteById(id);
         return CarBrandEntity.fromCarBrandDto(dto);
     }
 
 
-    public CarBrandEntity getCarBrandByCarBrandID(String id) {
+    public CarBrandEntity getCarBrandByCarBrandID(int id) {
         return CarBrandEntity.fromCarBrandDto(carBrandRepository.getById(id));
     }
 }

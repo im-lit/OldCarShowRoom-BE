@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ShowroomEntity {
-    private String showroomID;
+    private int showroomID;
 
     private String showroomName;
 
@@ -21,7 +21,7 @@ public class ShowroomEntity {
 
     private String showroomPhone;
 
-    private String userID;
+    private int userID;
 
     public static ShowroomEntity fromShowroomDto(ShowroomDto dto) {
         return ShowroomEntity.builder()

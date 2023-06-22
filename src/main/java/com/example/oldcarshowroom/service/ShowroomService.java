@@ -22,9 +22,7 @@ public class ShowroomService {
 
     private final UserRepository userRepository;
 
-    public boolean isExisted(String id) {
-        return showroomRepository.existsById(id);
-    }
+
 
     public ShowroomEntity createNewShowroom(ShowroomEntity entity) {
         ShowroomDto dto = ShowroomDto.builder()
@@ -38,11 +36,11 @@ public class ShowroomService {
     }
 
 
-    public ShowroomEntity getShowroomByShowroomID(String id) {
+    public ShowroomEntity getShowroomByShowroomID(int id) {
         return ShowroomEntity.fromShowroomDto(showroomRepository.getById(id));
     }
 
-    public ShowroomEntity updateExistedShowroom(String id, ShowroomEntity entity) {
+    public ShowroomEntity updateExistedShowroom(int id, ShowroomEntity entity) {
         ShowroomDto dto = showroomRepository.findById(id).orElseThrow();
 
         dto.setShowroomName(entity.getShowroomName());
@@ -53,7 +51,7 @@ public class ShowroomService {
         return ShowroomEntity.fromShowroomDto(showroomRepository.save(dto));
     }
 
-    public ShowroomEntity deleteExistedShowroom(String id) {
+    public ShowroomEntity deleteExistedShowroom(int id) {
         ShowroomDto dto = showroomRepository.findById(id).orElseThrow();
         showroomRepository.deleteById(id);
         return ShowroomEntity.fromShowroomDto(dto);

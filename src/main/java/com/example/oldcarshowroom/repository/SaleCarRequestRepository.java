@@ -8,14 +8,14 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface SaleCarRequestRepository extends JpaRepository<SaleCarRequestDto, String> {
+public interface SaleCarRequestRepository extends JpaRepository<SaleCarRequestDto, Integer> {
 
     @Query("select dto from SaleCarRequestDto dto where dto.showroomDto.showroomID = ?1")
-    List<SaleCarRequestDto> getSaleCarByShowRoomID(String id);
+    List<SaleCarRequestDto> getSaleCarByShowRoomID(int id);
 
     @Query("select dto from SaleCarRequestDto dto where dto.userDto.userID = ?1")
-    List<SaleCarRequestDto> getSaleCarByUserID(String id);
+    List<SaleCarRequestDto> getSaleCarByUserID(int id);
 
     @Query("select dto from SaleCarRequestDto dto where dto.carDto.carID = ?1")
-    List<SaleCarRequestDto> getSaleCarByCarID(String id);
+    List<SaleCarRequestDto> getSaleCarByCarID(int id);
 }

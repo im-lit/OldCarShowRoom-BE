@@ -18,7 +18,7 @@ public class SaleCarRequestDto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String saleCarID;
+    private int saleCarID;
 
     private boolean status;
 
