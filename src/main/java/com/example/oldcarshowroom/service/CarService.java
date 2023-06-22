@@ -1,13 +1,17 @@
 package com.example.oldcarshowroom.service;
 
 import com.example.oldcarshowroom.model.request.CarRequestEntity;
+import com.example.oldcarshowroom.model.request.CarStatusRequestEntity;
 import com.example.oldcarshowroom.repository.*;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.example.oldcarshowroom.model.dto.CarDto;
 import com.example.oldcarshowroom.model.response.CarResponseEntity;
 
+import java.awt.print.Pageable;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,14 +35,12 @@ public class CarService {
         return CarResponseEntity.fromCarDto(carRepository.getById(id));
     }
 
-    public List<CarResponseEntity> searchCarByCarName(String name){
-        return carRepository.searchCarByCarName(name).stream()
-                .map(CarResponseEntity::fromCarDto)
-                .collect(Collectors.toList());
-    }
 
-    public List<CarResponseEntity> searchCarByCarBrandName(String name){
-        return carRepository.searchCarByCarBrandName(name).stream()
+    public List<CarResponseEntity> searchCarByCarNameOrCarBrandName(String name){
+    	List<CarDto> listcar = carRepository.searchCarByCarNameOrCarBrandName(name);
+    	if(listcar.isEmpty()) 
+    		listcar = carRepository.searchCarByCarName(name);	
+        return listcar.stream()
                 .map(CarResponseEntity::fromCarDto)
                 .collect(Collectors.toList());
     }
@@ -67,6 +69,14 @@ public class CarService {
                 .map(CarResponseEntity::fromCarDto)
                 .collect(Collectors.toList());
     }
+    
+    public List<CarResponseEntity> find5MostExpensiveCar() {
+    	List<CarDto> listTop5Car= carRepository.findTop5MostExpensiveCars();
+        return listTop5Car.stream()
+                .map(CarResponseEntity::fromCarDto)
+                .collect(Collectors.toList());
+    }
+    
 
     public CarResponseEntity createNewCar(CarRequestEntity entity) {
         CarDto dto = CarDto.builder()
@@ -104,6 +114,12 @@ public class CarService {
         dto.setUserDto(userRepository.findById(entity.getUserID()).orElseThrow());
         dto.setShowroomDto(showroomRepository.findById(entity.getShowroomID()).orElseThrow());
 
+        return CarResponseEntity.fromCarDto(carRepository.save(dto));
+    }
+    
+    public CarResponseEntity updateStatusExistedCar(int id, CarStatusRequestEntity entity) {
+        CarDto dto = carRepository.findById(id).orElseThrow();
+        dto.setCarStatus(CarDto.CarStatus.valueOf(entity.getCarStatus()));
         return CarResponseEntity.fromCarDto(carRepository.save(dto));
     }
 

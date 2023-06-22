@@ -2,6 +2,8 @@ package com.example.oldcarshowroom.service;
 
 import com.example.oldcarshowroom.exception.LoginFailException2;
 import com.example.oldcarshowroom.model.request.UserRequestEntity;
+import com.example.oldcarshowroom.model.request.UserStatusRequestEntity;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
@@ -56,6 +58,12 @@ public class UserService {
         dto.setStatus(entity.isStatus());
         dto.setRoleDto(roleRepository.findById(entity.getRoleID()).orElseThrow());
 
+        return UserResponseEntity.fromUserDto(userRepository.save(dto));
+    }
+    
+    public UserResponseEntity updateStatusExistedUser(int id, UserStatusRequestEntity entity) {
+        UserDto dto = userRepository.findById(id).orElseThrow();
+        dto.setStatus(entity.isStatus());
         return UserResponseEntity.fromUserDto(userRepository.save(dto));
     }
 

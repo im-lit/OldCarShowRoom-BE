@@ -1,6 +1,8 @@
 package com.example.oldcarshowroom.controller;
 
 import com.example.oldcarshowroom.model.request.UserRequestEntity;
+import com.example.oldcarshowroom.model.request.UserStatusRequestEntity;
+
 import lombok.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -47,6 +49,13 @@ public class UserController {
                                              @RequestBody UserRequestEntity entity) {
 
         return ResponseEntity.ok().body(userService.updateExistedUser(id, entity));
+    }
+    
+    @PutMapping("/delete")
+    private ResponseEntity updateStatusExistedUser(@RequestParam int id,
+                                             @RequestBody UserStatusRequestEntity entity) {
+
+        return ResponseEntity.ok().body(userService.updateStatusExistedUser(id, entity));
     }
 
     @DeleteMapping()

@@ -1,6 +1,8 @@
 package com.example.oldcarshowroom.controller;
 
 import com.example.oldcarshowroom.model.request.CarRequestEntity;
+import com.example.oldcarshowroom.model.request.CarStatusRequestEntity;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,16 +31,15 @@ public class CarController  {
     private ResponseEntity getAllCarCanSale(){
         return ResponseEntity.ok().body(carService.getAllCarCanSale());
     }
-
-    @GetMapping("/search/carname")
-    private ResponseEntity searchCarByCarName(@RequestParam String searchName){
-        List<CarResponseEntity> entity = carService.searchCarByCarName(searchName);
-        return ResponseEntity.ok().body(entity);
+    
+    @GetMapping("/sort")
+    private ResponseEntity get5MostExpensiveCar(){
+        return ResponseEntity.ok().body(carService.find5MostExpensiveCar());
     }
 
-    @GetMapping("/search/brandname")
-    private ResponseEntity searchCarByCarBrandName(@RequestParam String searchName){
-        List<CarResponseEntity> entity = carService.searchCarByCarBrandName(searchName);
+    @GetMapping("/search")
+    private ResponseEntity searchCarByCarNameOrCarBrandName(@RequestParam String searchName){
+        List<CarResponseEntity> entity = carService.searchCarByCarNameOrCarBrandName(searchName);
         return ResponseEntity.ok().body(entity);
     }
     
@@ -68,6 +69,11 @@ public class CarController  {
     @PutMapping
     private ResponseEntity updateExistedCar(@RequestParam int id, @RequestBody CarRequestEntity entity) {
         return ResponseEntity.ok().body(carService.updateExistedCar(id, entity));
+    }
+    
+    @PutMapping("/update/carid")
+    private ResponseEntity updateStatusExistedCar(@RequestParam int id, @RequestBody CarStatusRequestEntity entity) {
+        return ResponseEntity.ok().body(carService.updateStatusExistedCar(id, entity));
     }
 
     @DeleteMapping()
