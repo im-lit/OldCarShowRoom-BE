@@ -71,8 +71,7 @@ public class CarService {
     }
     
     public List<CarResponseEntity> find5MostExpensiveCar() {
-    	List<CarDto> listTop5Car= carRepository.findTop5MostExpensiveCars();
-        return listTop5Car.stream()
+        return carRepository.findTop5MostExpensiveCars().stream()
                 .map(CarResponseEntity::fromCarDto)
                 .collect(Collectors.toList());
     }
