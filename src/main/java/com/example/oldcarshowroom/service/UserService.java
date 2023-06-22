@@ -10,6 +10,7 @@ import com.example.oldcarshowroom.model.response.UserEntity;
 import com.example.oldcarshowroom.repository.RoleRepository;
 import com.example.oldcarshowroom.repository.UserRepository;
 
+import java.awt.print.Printable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -68,8 +69,11 @@ public class UserService {
     }
 
     public UserEntity checkLogin(String userName, String password) {
-        //123213
-        return UserEntity.fromUserDto(userRepository.checkLoginUserByUserIdAndPassword(userName, password));
+        UserDto user = userRepository.checkLoginUserByUserIdAndPassword(userName, password);
+        if(user == null) {
+        	System.out.println("Wrong UserName or Password");
+        }
+        return UserEntity.fromUserDto(user);
 
     }
 
