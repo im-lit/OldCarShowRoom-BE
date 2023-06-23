@@ -29,6 +29,8 @@ public class UserResponseEntity {
 
     private boolean status;
 
+    private String mail;
+
     private int roleID;
 
     public static UserResponseEntity fromUserDto(UserDto dto) {
@@ -40,6 +42,7 @@ public class UserResponseEntity {
                 .phone(dto.getPhone())
                 .address(dto.getAddress())
                 .avatarUrl(dto.getAvatarUrl())
+                .mail(dto.getMail())
                 .status(dto.isStatus())
                 .roleID(dto.getRoleDto().getRoleID())
                 .build();

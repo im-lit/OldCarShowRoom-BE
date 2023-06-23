@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -20,9 +22,12 @@ public class BuyCarRequestDto {
     @Column(name = "buy_carid")
     private int buyCarID;
 
-    private boolean status;
+    @Enumerated(EnumType.STRING)
+    private BuyCarStatus status;
 
-    private String date;
+    private LocalDate createdDate;
+
+    private LocalDateTime dateTrading;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userID")
@@ -38,4 +43,10 @@ public class BuyCarRequestDto {
     @JoinColumn(name = "carID")
     @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
     private CarDto carDto;
+
+    public enum BuyCarStatus{
+        APPROVING, APPROVED, NOT_APPROVED
+    }
+
+
 }

@@ -7,6 +7,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -15,9 +18,11 @@ public class BuyCarRequestResponseEntity {
 
     private int buyCarID;
 
-    private boolean status;
+    private String status;
 
-    private String date;
+    private LocalDate  createdDate;
+
+    private LocalDateTime dateTrading;
 
     private int userID;
 
@@ -28,8 +33,9 @@ public class BuyCarRequestResponseEntity {
     public static BuyCarRequestResponseEntity fromBuyCarRequestDto(BuyCarRequestDto dto) {
         return BuyCarRequestResponseEntity.builder()
                 .buyCarID(dto.getBuyCarID())
-                .status(dto.isStatus())
-                .date(dto.getDate())
+                .status(dto.getStatus().toString())
+                .createdDate(dto.getCreatedDate())
+                .dateTrading(dto.getDateTrading())
                 .userID(dto.getUserDto().getUserID())
                 .carID(dto.getCarDto().getCarID())
                 .showroomID(dto.getShowroomDto().getShowroomID())

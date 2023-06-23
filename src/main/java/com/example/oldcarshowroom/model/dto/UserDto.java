@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 
 @Data
 @Entity
@@ -34,6 +35,9 @@ public class UserDto {
     private String address;
 
     private String avatarUrl;
+
+    @Email
+    private String mail;
 
     private boolean status;
 

@@ -5,15 +5,19 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class BuyCarRequestRequestEntity {
 
-    private boolean status;
+    private String status;
 
-    private String date;
+//    private LocalDate createdDate;
+
+    private String dateTrading;
 
     private int userID;
 

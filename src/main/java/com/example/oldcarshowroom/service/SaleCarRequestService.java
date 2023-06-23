@@ -7,6 +7,9 @@ import com.example.oldcarshowroom.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,6 +25,7 @@ public class SaleCarRequestService {
 
     private final ShowroomRepository showroomRepository;
 
+    String fmt = "dd/MM/yyyy HH:mm";
 
 
     public SaleCarRequestResponseEntity getSaleCarBySaleCarID(int id) {
@@ -48,8 +52,9 @@ public class SaleCarRequestService {
 
     public SaleCarRequestResponseEntity createNewSaleCarRequest(SaleCarRequestRequestEntity entity) {
         SaleCarRequestDto dto = SaleCarRequestDto.builder()
-                .status(entity.isStatus())
-                .date(entity.getDate())
+                .status(SaleCarRequestDto.SaleCarStatus.valueOf(entity.getStatus()))
+                .createdDate(LocalDate.now())
+                .dateTrading(LocalDateTime.parse(entity.getDateTrading(), DateTimeFormatter.ofPattern(fmt)))
                 .userDto(userRepository.findById(entity.getUserID()).orElseThrow())
                 .carDto(carRepository.findById(entity.getCarID()).orElseThrow())
                 .showroomDto(showroomRepository.findById(entity.getShowroomID()).orElseThrow())
@@ -62,8 +67,8 @@ public class SaleCarRequestService {
     public SaleCarRequestResponseEntity updateExistedSaleCarRequest(int id, SaleCarRequestRequestEntity entity) {
         SaleCarRequestDto dto = saleCarRequestRepository.findById(id).orElseThrow();
 
-        dto.setDate(entity.getDate());
-        dto.setStatus(entity.isStatus());
+        dto.setDateTrading(LocalDateTime.parse(entity.getDateTrading(), DateTimeFormatter.ofPattern(fmt)));
+        dto.setStatus(SaleCarRequestDto.SaleCarStatus.valueOf(entity.getStatus()));
         dto.setCarDto(carRepository.findById(entity.getUserID()).orElseThrow());
         dto.setUserDto(userRepository.findById(entity.getUserID()).orElseThrow());
         dto.setShowroomDto(showroomRepository.findById(entity.getShowroomID()).orElseThrow());

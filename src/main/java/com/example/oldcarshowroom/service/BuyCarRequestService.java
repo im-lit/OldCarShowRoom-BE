@@ -11,6 +11,9 @@ import com.example.oldcarshowroom.repository.CarRepository;
 import com.example.oldcarshowroom.repository.ShowroomRepository;
 import com.example.oldcarshowroom.repository.UserRepository;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,6 +28,8 @@ public class BuyCarRequestService {
     private final UserRepository userRepository;
 
     private final ShowroomRepository showroomRepository;
+
+    String fmt = "dd/MM/yyyy HH:mm";
 
 
     public BuyCarRequestResponseEntity getBuyCarByBuyCarID(int id) {
@@ -50,9 +55,11 @@ public class BuyCarRequestService {
     }
 
     public BuyCarRequestResponseEntity createNewBuyCarRequest(BuyCarRequestRequestEntity entity) {
+
         BuyCarRequestDto dto = BuyCarRequestDto.builder()
-                .status(entity.isStatus())
-                .date(entity.getDate())
+                .status(BuyCarRequestDto.BuyCarStatus.valueOf(entity.getStatus()))
+                .createdDate(LocalDate.now())
+                .dateTrading(LocalDateTime.parse(entity.getDateTrading(), DateTimeFormatter.ofPattern(fmt)))
                 .userDto(userRepository.findById(entity.getUserID()).orElseThrow())
                 .carDto(carRepository.findById(entity.getCarID()).orElseThrow())
                 .showroomDto(showroomRepository.findById(entity.getShowroomID()).orElseThrow())
@@ -65,8 +72,8 @@ public class BuyCarRequestService {
     public BuyCarRequestResponseEntity updateExistedBuyCarRequest(int id, BuyCarRequestRequestEntity entity) {
         BuyCarRequestDto dto = buyCarRequestRepository.findById(id).orElseThrow();
 
-        dto.setDate(entity.getDate());
-        dto.setStatus(entity.isStatus());
+        dto.setDateTrading(LocalDateTime.parse(entity.getDateTrading(), DateTimeFormatter.ofPattern(fmt)));
+        dto.setStatus(BuyCarRequestDto.BuyCarStatus.valueOf(entity.getStatus()));
         dto.setCarDto(carRepository.findById(entity.getUserID()).orElseThrow());
         dto.setUserDto(userRepository.findById(entity.getUserID()).orElseThrow());
         dto.setShowroomDto(showroomRepository.findById(entity.getShowroomID()).orElseThrow());
@@ -78,7 +85,6 @@ public class BuyCarRequestService {
         BuyCarRequestDto dto = buyCarRequestRepository.findById(id).orElseThrow();
         buyCarRequestRepository.deleteById(id);
 
-        System.out.println("abc");
         return BuyCarRequestResponseEntity.fromBuyCarRequestDto(dto);
     }
 

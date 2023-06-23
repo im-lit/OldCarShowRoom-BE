@@ -11,9 +11,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class SaleCarRequestRequestEntity {
 
-    private boolean status;
+    private String status;
 
-    private String date;
+    private String dateTrading;
 
     private int userID;
 

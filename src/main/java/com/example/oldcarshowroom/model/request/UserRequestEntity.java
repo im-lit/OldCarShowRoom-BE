@@ -22,6 +22,8 @@ public class UserRequestEntity {
 
     private String avatarUrl;
 
+    private String mail;
+
     private boolean status;
 
     private int roleID;
