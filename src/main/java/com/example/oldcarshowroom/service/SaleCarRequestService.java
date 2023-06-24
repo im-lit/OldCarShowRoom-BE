@@ -81,4 +81,10 @@ public class SaleCarRequestService {
         saleCarRequestRepository.deleteById(id);
         return SaleCarRequestResponseEntity.fromSaleCarRequestDto(dto);
     }
+    
+    public SaleCarRequestResponseEntity updateStatusExistedSaleCarRequest(int id, String status) {
+        SaleCarRequestDto dto = saleCarRequestRepository.findById(id).orElseThrow();
+        dto.setStatus(SaleCarRequestDto.SaleCarStatus.valueOf(status));
+        return SaleCarRequestResponseEntity.fromSaleCarRequestDto(saleCarRequestRepository.save(dto));
+    }
 }

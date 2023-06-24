@@ -87,7 +87,11 @@ public class BuyCarRequestService {
 
         return BuyCarRequestResponseEntity.fromBuyCarRequestDto(dto);
     }
-
+    public BuyCarRequestResponseEntity updateStatusExistedBuyCarRequest(int id, String status){
+        BuyCarRequestDto dto = buyCarRequestRepository.findById(id).orElseThrow();
+        dto.setStatus(BuyCarRequestDto.BuyCarStatus.valueOf(status));
+        return BuyCarRequestResponseEntity.fromBuyCarRequestDto(buyCarRequestRepository.save(dto));
+    }
 
 
 

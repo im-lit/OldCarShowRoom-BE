@@ -1,19 +1,20 @@
 package com.example.oldcarshowroom.service;
 
-import com.example.oldcarshowroom.model.request.CarRequestEntity;
-import com.example.oldcarshowroom.model.request.CarStatusRequestEntity;
-import com.example.oldcarshowroom.repository.*;
-import lombok.RequiredArgsConstructor;
+import java.util.List;
+import java.util.stream.Collectors;
 
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.example.oldcarshowroom.model.dto.CarDto;
+import com.example.oldcarshowroom.model.request.CarRequestEntity;
 import com.example.oldcarshowroom.model.response.CarResponseEntity;
+import com.example.oldcarshowroom.repository.CarBrandRepository;
+import com.example.oldcarshowroom.repository.CarRepository;
+import com.example.oldcarshowroom.repository.CarTypeRepository;
+import com.example.oldcarshowroom.repository.ShowroomRepository;
+import com.example.oldcarshowroom.repository.UserRepository;
 
-import java.awt.print.Pageable;
-import java.util.List;
-import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
@@ -116,9 +117,9 @@ public class CarService {
         return CarResponseEntity.fromCarDto(carRepository.save(dto));
     }
     
-    public CarResponseEntity updateStatusExistedCar(int id, CarStatusRequestEntity entity) {
-        CarDto dto = carRepository.findById(id).orElseThrow();
-        dto.setCarStatus(CarDto.CarStatus.valueOf(entity.getCarStatus()));
+    public CarResponseEntity updateStatusExistedCar(int carid, String status) {
+        CarDto dto = carRepository.findById(carid).orElseThrow();
+        dto.setCarStatus(CarDto.CarStatus.valueOf(status));
         return CarResponseEntity.fromCarDto(carRepository.save(dto));
     }
 

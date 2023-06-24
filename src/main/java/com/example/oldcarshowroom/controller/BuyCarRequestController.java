@@ -52,6 +52,11 @@ public class BuyCarRequestController {
     private ResponseEntity updateExistedBuyCarRequest(@RequestParam int id,@RequestBody BuyCarRequestRequestEntity entity) {
         return ResponseEntity.ok().body(buyCarRequestService.updateExistedBuyCarRequest(id, entity));
     }
+    @PutMapping("/{id}/status")
+    private ResponseEntity updateStatusExistedBuyCarRequest(@PathVariable int id,
+                                                            @RequestParam String status) {
+        return ResponseEntity.ok().body(buyCarRequestService.updateStatusExistedBuyCarRequest(id, status));
+    }
 
     @DeleteMapping()
     private ResponseEntity deleteExistedBuyCarRequest(@RequestParam int id) {

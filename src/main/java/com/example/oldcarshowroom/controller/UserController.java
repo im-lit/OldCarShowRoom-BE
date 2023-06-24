@@ -1,16 +1,24 @@
 package com.example.oldcarshowroom.controller;
 
-import com.example.oldcarshowroom.model.request.UserRequestEntity;
-import com.example.oldcarshowroom.model.request.UserStatusRequestEntity;
+import static com.example.oldcarshowroom.config.CommonUtils.controllerWrapper;
 
-import lombok.*;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
+import com.example.oldcarshowroom.model.request.UserRequestEntity;
 import com.example.oldcarshowroom.model.response.UserResponseEntity;
 import com.example.oldcarshowroom.service.UserService;
 
-import static com.example.oldcarshowroom.config.CommonUtils.controllerWrapper;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @CrossOrigin
@@ -51,11 +59,11 @@ public class UserController {
         return ResponseEntity.ok().body(userService.updateExistedUser(id, entity));
     }
     
-    @PutMapping("/delete")
-    private ResponseEntity updateStatusExistedUser(@RequestParam int id,
-                                             @RequestBody UserStatusRequestEntity entity) {
+    @PutMapping("/{id}/status")
+    private ResponseEntity updateStatusExistedUser(@PathVariable  int id,
+                                             @RequestParam boolean status) {
 
-        return ResponseEntity.ok().body(userService.updateStatusExistedUser(id, entity));
+        return ResponseEntity.ok().body(userService.updateStatusExistedUser(id, status));
     }
 
     @DeleteMapping()

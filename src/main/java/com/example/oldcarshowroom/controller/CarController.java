@@ -1,16 +1,24 @@
 package com.example.oldcarshowroom.controller;
 
-import com.example.oldcarshowroom.model.request.CarRequestEntity;
-import com.example.oldcarshowroom.model.request.CarStatusRequestEntity;
+import java.util.List;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
+import com.example.oldcarshowroom.model.request.CarRequestEntity;
 import com.example.oldcarshowroom.model.response.CarResponseEntity;
 import com.example.oldcarshowroom.service.CarService;
 
-import java.util.List;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @CrossOrigin
@@ -71,9 +79,9 @@ public class CarController  {
         return ResponseEntity.ok().body(carService.updateExistedCar(id, entity));
     }
     
-    @PutMapping("/update/carid")
-    private ResponseEntity updateStatusExistedCar(@RequestParam int id, @RequestBody CarStatusRequestEntity entity) {
-        return ResponseEntity.ok().body(carService.updateStatusExistedCar(id, entity));
+    @PutMapping("/{carid}/status")
+    private ResponseEntity updateStatusExistedCar(@PathVariable int carid, @RequestParam String status) {
+        return ResponseEntity.ok().body(carService.updateStatusExistedCar(carid, status));
     }
 
     @DeleteMapping()

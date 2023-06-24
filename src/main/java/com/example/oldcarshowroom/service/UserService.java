@@ -1,20 +1,18 @@
 package com.example.oldcarshowroom.service;
 
-import com.example.oldcarshowroom.exception.LoginFailException2;
-import com.example.oldcarshowroom.model.request.UserRequestEntity;
-import com.example.oldcarshowroom.model.request.UserStatusRequestEntity;
+import java.util.List;
+import java.util.stream.Collectors;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
+import com.example.oldcarshowroom.exception.LoginFailException2;
 import com.example.oldcarshowroom.model.dto.UserDto;
+import com.example.oldcarshowroom.model.request.UserRequestEntity;
 import com.example.oldcarshowroom.model.response.UserResponseEntity;
 import com.example.oldcarshowroom.repository.RoleRepository;
 import com.example.oldcarshowroom.repository.UserRepository;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
@@ -61,9 +59,9 @@ public class UserService {
         return UserResponseEntity.fromUserDto(userRepository.save(dto));
     }
     
-    public UserResponseEntity updateStatusExistedUser(int id, UserStatusRequestEntity entity) {
+    public UserResponseEntity updateStatusExistedUser(int id, boolean status) {
         UserDto dto = userRepository.findById(id).orElseThrow();
-        dto.setStatus(entity.isStatus());
+        dto.setStatus(status);
         return UserResponseEntity.fromUserDto(userRepository.save(dto));
     }
 

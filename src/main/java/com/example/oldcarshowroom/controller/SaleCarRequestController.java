@@ -52,6 +52,11 @@ public class SaleCarRequestController {
                                                        @RequestBody SaleCarRequestRequestEntity entity) {
         return ResponseEntity.ok().body(saleCarRequestService.updateExistedSaleCarRequest(id, entity));
     }
+    @PutMapping("/{id}/status")
+    private ResponseEntity updateStatusExistedSaleCarRequest(@RequestParam int id,
+                                                             @RequestParam String status) {
+        return ResponseEntity.ok().body(saleCarRequestService.updateStatusExistedSaleCarRequest(id, status));
+    }
 
     @DeleteMapping()
     private ResponseEntity deleteExistedSaleCarRequest(@RequestParam int id) {
