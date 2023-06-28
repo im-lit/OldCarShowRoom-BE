@@ -45,6 +45,12 @@ public class ShowroomService {
     public ShowroomResponseEntity getShowroomByShowroomID(int id) {
         return ShowroomResponseEntity.fromShowroomDto(showroomRepository.getById(id));
     }
+    public List<ShowroomResponseEntity> getShowroomByUserID(int id) {
+        return showroomRepository.getShowroomByUserId(id).stream().
+        		map(ShowroomResponseEntity::fromShowroomDto)
+        		.collect(Collectors.toList());
+    }
+    
 
     public ShowroomResponseEntity updateExistedShowroom(int id, ShowroomRequestEntity entity) {
         ShowroomDto dto = showroomRepository.findById(id).orElseThrow();

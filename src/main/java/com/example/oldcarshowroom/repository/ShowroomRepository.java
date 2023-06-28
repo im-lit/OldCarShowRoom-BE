@@ -12,5 +12,7 @@ import com.example.oldcarshowroom.model.dto.ShowroomDto;
 @Repository
 
 public interface ShowroomRepository extends JpaRepository<ShowroomDto,Integer> {
+    @Query("select dto from ShowroomDto dto where dto.userDto.userID = ?1")
+    List<ShowroomDto> getShowroomByUserId(int id);
     
 }

@@ -2,6 +2,9 @@ package com.example.oldcarshowroom.controller;
 
 import com.example.oldcarshowroom.model.request.ShowroomRequestEntity;
 import lombok.RequiredArgsConstructor;
+
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +31,13 @@ public class ShowroomController {
         ShowroomResponseEntity entity = showroomService.getShowroomByShowroomID(id);
         return ResponseEntity.ok().body(entity);
     }
+    
+    @GetMapping("/get-showroom/{id}")
+    private ResponseEntity getShowroomByUserID(@PathVariable int id) {
+        List<ShowroomResponseEntity> entity = showroomService.getShowroomByUserID(id);
+        return ResponseEntity.ok().body(entity);
+    }
+    
 
     @PostMapping()
     public ResponseEntity createNewShowroom(@RequestBody ShowroomRequestEntity entity) {
