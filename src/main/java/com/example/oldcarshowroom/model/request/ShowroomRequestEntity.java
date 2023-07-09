@@ -19,4 +19,5 @@ public class ShowroomRequestEntity {
     private String showroomAvatar;
 
     private int userID;
+    
 }

@@ -12,7 +12,5 @@ import lombok.NoArgsConstructor;
 public class CarImageRequestEntity {
 
     private String imageUrl;
-
     private int carID;
-
 }

@@ -12,5 +12,4 @@ import lombok.NoArgsConstructor;
 public class RoleRequestEntity {
 
     private String roleName;
-
 }

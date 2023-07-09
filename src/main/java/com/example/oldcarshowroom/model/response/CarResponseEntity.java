@@ -58,5 +58,4 @@ public class CarResponseEntity {
                     .showroomID(dto.getShowroomDto().getShowroomID())
                     .build();
         }
-
 }

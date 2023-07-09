@@ -11,9 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CarBrandRequestEntity {
 
-
     private String carBrandName;
-
     private String logoUrl;
 
 }

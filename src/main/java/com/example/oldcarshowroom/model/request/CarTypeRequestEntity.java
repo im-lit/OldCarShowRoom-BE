@@ -11,4 +11,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CarTypeRequestEntity {
     private String carTypeName;
+    
 }

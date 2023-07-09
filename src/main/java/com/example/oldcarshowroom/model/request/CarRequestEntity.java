@@ -36,4 +36,5 @@ public class CarRequestEntity {
     private int userID;
 
     private int showroomID;
+    
 }
