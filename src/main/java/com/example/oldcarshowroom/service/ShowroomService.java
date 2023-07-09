@@ -35,6 +35,7 @@ public class ShowroomService {
                 .showroomName(entity.getShowroomName())
                 .showroomAddress(entity.getShowroomAddress())
                 .showroomPhone(entity.getShowroomPhone())
+                .showroomAvatar(entity.getShowroomAvatar())
                 .userDto(userRepository.findById(entity.getUserID()).orElseThrow())
                 .build();
 

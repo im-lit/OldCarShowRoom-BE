@@ -45,6 +45,7 @@ public class CarDto {
     @Enumerated(EnumType.STRING)
     private CarStatus carStatus;
     
+    @Column(name = "car_avatar", columnDefinition = "varchar(500)", nullable = true)
     private String carAvatar;
 
     @ManyToOne(fetch = FetchType.LAZY)

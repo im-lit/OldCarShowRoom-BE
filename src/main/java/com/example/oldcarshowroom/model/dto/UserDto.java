@@ -33,7 +33,8 @@ public class UserDto {
     	
     @Column(name = "address", columnDefinition = "nvarchar(255)", nullable = true)
     private String address;
-
+    
+    @Column(name = "avatar_url", columnDefinition = "varchar(500)", nullable = true)
     private String avatarUrl;
 
     @Email

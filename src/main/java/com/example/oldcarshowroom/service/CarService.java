@@ -90,6 +90,7 @@ public class CarService {
                 .carDescription(entity.getCarDescription())
                 .carCondition(entity.getCarCondition())
                 .carStatus(CarDto.CarStatus.valueOf(entity.getCarStatus()))
+                .carAvatar(entity.getCarAvatar())
                 .userDto(userRepository.findById(entity.getUserID()).orElseThrow())
                 .showroomDto(showroomRepository.findById(entity.getShowroomID()).orElseThrow())
                 .build();
