@@ -1,15 +1,16 @@
 package com.example.oldcarshowroom.service;
 
-import com.example.oldcarshowroom.model.request.RoleRequestEntity;
-import lombok.RequiredArgsConstructor;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Service;
 
 import com.example.oldcarshowroom.model.dto.RoleDto;
+import com.example.oldcarshowroom.model.request.RoleRequestEntity;
 import com.example.oldcarshowroom.model.response.RoleResponseEntity;
 import com.example.oldcarshowroom.repository.RoleRepository;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
