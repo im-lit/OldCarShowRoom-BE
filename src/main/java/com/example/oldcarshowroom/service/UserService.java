@@ -34,6 +34,7 @@ public class UserService {
                 .fullName(entity.getFullName())
                 .phone(entity.getPhone())
                 .address(entity.getAddress())
+                .mail(entity.getMail())
                 .avatarUrl(entity.getAvatarUrl())
                 .status(entity.isStatus())
                 .roleDto(roleRepository.findById(entity.getRoleID()).orElseThrow())

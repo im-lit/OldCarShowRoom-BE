@@ -38,6 +38,7 @@ public class UserDto {
     private String avatarUrl;
 
     @Email
+    @Column(name = "mail", nullable = true)
     private String mail;
 
     private boolean status;
